@@ -259,11 +259,11 @@
                             <span class="nav-text">Inicio</span>
                         </a>
                     </li>
-                    @foreach ($roles as $rol)
+                    {{-- @foreach ($roles as $rol)
                         @if ($rol->id_rol == '2')
                             <li>
                                 <h5 class="nav-text"> {{ $rol->nombre_rol }}</h5>
-                            </li>
+                            </li> --}}
                             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                                     <i class="flaticon-050-info"></i>
                                     <span class="nav-text">Rubros</span>
@@ -369,10 +369,10 @@
                                     @endforeach
                                 </ul>
                             </li>
-                        @else
+                        {{-- @else
                             <li>
                                 <h5 class="nav-text"> {{ $rol->nombre_rol }}</h5>
-                            </li>
+                            </li> --}}
                             <li><a href="{{ URL('list-emp-admin') }}" class="ai-icon" aria-expanded="false">
                                     <i class="flaticon-013-checkmark"></i>
                                     <span class="nav-text">Empresas</span>
@@ -394,8 +394,8 @@
                                     <span class="nav-text">Categorias</span>
                                 </a>
                             </li>
-                        @endif
-                    @endforeach
+                        {{-- @endif
+                    @endforeach --}}
 
 
 

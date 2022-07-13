@@ -70,6 +70,9 @@
                                             <a href="{{ URL('detalle-empresas/'.$empresa->id_empresa) }}"
                                                  class="btn btn-flat btn-dark btn-theme-colored btn-sm">Ver Más
                                                 <i class="fa fa-angle-double-right"></i></a>
+                                            <a href="{{ URL('list-prod-empresas/'.$empresa->id_empresa) }}"
+                                                 class="btn btn-flat btn-dark btn-theme-colored btn-sm">Productos
+                                                <i class="fa fa-angle-double-right"></i></a>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">

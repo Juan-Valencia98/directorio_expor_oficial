@@ -174,7 +174,7 @@
                                                 <div class="price">
                                                     {{-- <del><span class="amount">$520.00</span></del> --}}
                                                     <ins><span
-                                                            class="amount">$480.00</span></ins>
+                                                            class="amount">{{$producto->precio_producto.' '.$producto->abrv_moneda}}</span></ins>
                                                 </div>
                                                 <div class="btn-add-to-cart-wrapper">
                                                     <a class="btn btn-default btn-xs btn-add-to-cart" href="{{ URL('detalle-producto/'.$producto->id_producto) }}">Mas Detalle</a>
