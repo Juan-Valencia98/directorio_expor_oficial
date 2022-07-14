@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label class="text-black font-w500 ">Pagina Web</label>
-                                    <input type="text" class="form-control focus:outline-none focus:ring-2 input-number" name="pag_web"
+                                    <input type="text" class="form-control focus:outline-none focus:ring-2" name="pag_web"
                                         id="pag_web" value="{{$empresasEdit->pag_web}}" required>
                                 </div>
                                 <div class="mb-3 col-md-6">
@@ -91,7 +91,7 @@
                                 <div class="input-group">
                                     <div class="form-file ">
                                         <input accept="image/png,image/jpeg,image/jpg" type="file"
-                                            class="form-file-input form-control focus:outline-none input-image-2"
+                                            class="form-file-input form-control focus:outline-none "
                                             name="imagen_empresa" id="imagen_empresa" value="{{$empresasEdit->imagen_empresa}}" required>
                                     </div>
                                 </div>

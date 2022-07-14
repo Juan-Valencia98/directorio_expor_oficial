@@ -166,7 +166,7 @@
                     <a href="javascript:void(0);" class="btn-close" data-bs-dismiss="modal"></a>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ URL('crea-prod/' . $empresas[0]->id_empresa) }}"
+                    <form method="POST" action="{{ URL('crea-prod/' . $idempresas) }}"
                         enctype="multipart/form-data" autocomplete="off">
                         @csrf
                         <div class="mb-3">

@@ -77,7 +77,8 @@ class HomeController extends Controller
             'rubros' => $rubros,
             'categorias' => $categorias,
             'monedas' => $monedas,
-            'medidas' => $medidas
+            'medidas' => $medidas,
+            'idempresas' => $id
         ]);
     }
     public function agreProd($id, Request $data)

@@ -60,11 +60,9 @@ Route::get('publicar-emp-admin/{id}', [App\Http\Controllers\HomeController::clas
 
 
 
-Route::get('/', [App\Http\Controllers\ClienteController::class, 'index'])->name('inicio');
 
-Route::get('Inicio', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\ClienteController::class, 'index'])->name('inicio');
+Route::get('Inicio', [App\Http\Controllers\ClienteController::class, 'index'])->name('inicio');
 
 Route::get('empresas', [App\Http\Controllers\ClienteController::class, 'listaEmpresas'])->name('empresas');
 Route::get('rubros', [App\Http\Controllers\ClienteController::class, 'listaRubros'])->name('rubros');

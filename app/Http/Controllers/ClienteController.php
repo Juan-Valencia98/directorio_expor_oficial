@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\DB;
 class ClienteController extends Controller
 {
     public function index(){
+        $productos = DB::table('productos')->get();
+
+        foreach ($productos as $producto) {
+            DB::table('productos')
+            ->where('id_producto',) 
+            ->update([
+                'estado'           => 'eliminado',
+            ]);
+        }
+      
         return view('vistas.inicio');
     }
 

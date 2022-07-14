@@ -353,12 +353,12 @@
                                                     <span class="badge badge-secondary">Rechazado</span>
                                                 </a>
                                             </li>
-                                        @elseif ($empresa->estado_ruex == '0')
+                                        {{-- @elseif ($empresa->estado_ruex == 'false')
                                             <li><a href="#">
                                                     {{ $empresa->razon_social_empresa }}
                                                     <span class="badge badge-secondary">Sin Ruex</span>
                                                 </a>
-                                            </li>
+                                            </li> --}}
                                         @elseif ($empresa->estado == 'activo')
                                             <li><a href="{{ URL('list-prod-admin/' . $empresa->id_empresa) }}">
                                                     {{ $empresa->razon_social_empresa }}

@@ -80,13 +80,13 @@ class LoginController extends Controller
                     ->update([
                         'matricula'             => $data->matricula??'',
                         'ruex'                  => $data->ruex ?? 0,
-                        'estado_ruex'           => $data->estado_ruex??0,
+                        'estado_ruex'           => $data->estado_ruex??false,
                         'id_estado_empresa'     => $data->id_estado_empresa,
                     ]);
                 }
                 return $this->sendLoginResponse($request);
             } else {
-                return view('welcome');
+                return redirect()->route('home');
             }
         } else {
             $response = Http::post('http://api.taypi.senavex.gob.bo/api/pruebas/upea/v1/signin', [
@@ -105,9 +105,9 @@ class LoginController extends Controller
                 User::create([
                     'ci' => $dataPerson->ci,
                     'nombres' => $dataPerson->nombres,
-                    'primerApellido' => $dataPerson->primerApellido,
-                    'segundoApellido' => $dataPerson->segundoApellido,
-                    'email' => $dataPerson->email,
+                    'primerApellido' => $dataPerson->primerApellido??'',
+                    'segundoApellido' => $dataPerson->segundoApellido??'',
+                    'email' => $dataPerson->email??'',
                     'username' => $dataPerson->ci,
                     'password' => Hash::make($request->password),
                 ]);
@@ -157,7 +157,7 @@ class LoginController extends Controller
                 
                 
 
-                return view('welcome');
+                return redirect()->route('home');
             } else {
                 return $this->sendFailedLoginResponse($request, 'auth.failed_status');
             }

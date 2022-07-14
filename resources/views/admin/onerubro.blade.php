@@ -36,7 +36,7 @@
                                 <div class="input-group">
                                     <div class="form-file ">
                                         <input accept="image/png,image/jpeg,image/jpg" type="file"
-                                            class="form-file-input form-control focus:outline-none input-image-2"
+                                            class="form-file-input form-control focus:outline-none"
                                             name="imagen_rubro" id="imagen_rubro" value="{{$rubroEdit->imagen_rubro}}" required>
                                     </div>
                                 </div>

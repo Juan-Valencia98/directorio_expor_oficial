@@ -338,7 +338,7 @@
 
                 <div class="row mt-30 pt-15">
                     <div class="col-md-12 col-sm-6">
-                        <img src="isos.png" alt="">
+                        <img src="{{asset('storage/images/vistas/isos.png')}}" alt="">
 
                     </div>
 
