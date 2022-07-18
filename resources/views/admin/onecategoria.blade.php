@@ -17,7 +17,7 @@
                         <a href="javascript:void(0);" class="btn-close" data-bs-dismiss="modal"></a>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" action="{{ URL('update-categorias/' . $categoriaEdit->id_rubro) }}"
+                        <form method="POST" action="{{ URL('update-categorias/' . Crypt::encryptString($categoriaEdit->id_rubro)) }}"
                             enctype="multipart/form-data" autocomplete="off">
                             @csrf
                             <div class="mb-3">

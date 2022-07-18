@@ -44,15 +44,15 @@
                                                 <td>{{ $data->nombre_rubro }}</td>
                                                 <td>{{ $data->abreviacion_rubro }}</td>
                                                 <td><a
-                                                        href="{{ URL('estado-rubros-admin/' . $data->id_rubro) }}"><strong>{{ $data->estado }}</strong></a>
+                                                        href="{{ URL('estado-rubros-admin/' . Crypt::encryptString($data->id_rubro)) }}"><strong>{{ $data->estado }}</strong></a>
                                                 </td>
                                                 <td>{{ $data->created_at }}</td>
                                                 <td>
                                                     <div class="d-flex">
-                                                        <a href="{{ URL('one-rubros-admin/' . $data->id_rubro) }}"
+                                                        <a href="{{ URL('one-rubros-admin/' . Crypt::encryptString($data->id_rubro)) }}"
                                                             class="btn btn-primary shadow btn-xs sharp me-1"><i
                                                                 class="fa fa-pencil"></i></a>
-                                                        <a href="{{ URL('eliminar-rubros-admin/' . $data->id_rubro) }}"
+                                                        <a href="{{ URL('eliminar-rubros-admin/' . Crypt::encryptString($data->id_rubro)) }}"
                                                             class="btn btn-danger shadow btn-xs sharp"><i
                                                                 class="fa fa-trash"></i></a>
                                                     </div>

@@ -90,7 +90,7 @@
                                 </div>
                             </div>
                         </div> --}}
-
+                        {{$rubros->links()}}
                         <div class="row">
                             <div class="col-sm-12">
                                 <nav>

@@ -11,6 +11,8 @@ use App\Models\UnidadMedidas;
 use App\Models\Empresas;
 use App\Models\GrupoRubro;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\Support\Jsonable;
+use Illuminate\Pagination\Paginator;
 class ClienteController extends Controller
 {
     public function index(){
@@ -127,10 +129,11 @@ class ClienteController extends Controller
         ->where([
             ['estado', 'activo']
         ])->orderByDesc('updated_at')->get();
+
         $rubros = DB::table('rubro')
         ->where([
             ['estado', 'activo']
-        ])->orderByDesc('updated_at')->get();
+        ])->orderByDesc('updated_at')->paginate(3, ['*'], 'page', null);
 
 
         return view ('vistas.listarubro',[

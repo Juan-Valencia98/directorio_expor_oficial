@@ -35,7 +35,6 @@ class CreateProductosTable extends Migration
             $table->integer('id_moneda');
 
             $table->integer('id_empresa');
-            $table->integer('id_user');
  
             $table->timestamps();
             $table->foreign('id_rubro')->references('id_rubro')->on('rubro');
@@ -44,7 +43,6 @@ class CreateProductosTable extends Migration
             $table->foreign('id_moneda')->references('id_moneda')->on('monedas');
 
             $table->foreign('id_empresa')->references('id_empresa')->on('empresas');
-            $table->foreign('id_user')->references('id')->on('users');
         });
     }
 

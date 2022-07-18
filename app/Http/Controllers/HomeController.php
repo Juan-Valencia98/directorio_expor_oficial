@@ -12,6 +12,11 @@ use App\Models\Monedas;
 use App\Models\UnidadMedidas;
 use App\Models\Empresas;
 use App\Models\GrupoRubro;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\File;
+
+use Illuminate\Contracts\Encryption\DecryptException;
+ 
 
 class HomeController extends Controller
 {
@@ -52,6 +57,7 @@ class HomeController extends Controller
     ////////////////////////////////////////////////////////////////////////////////////////////////
     public function listProd($id)
     {
+        $idDes =Crypt::decryptString($id);
         $empresas = DB::table('grupo_empresa_user')
             ->join('empresas', 'grupo_empresa_user.id_empresa', '=', 'empresas.id_empresa')
             ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
@@ -65,7 +71,7 @@ class HomeController extends Controller
 
 
 
-        $productos = Productos::where('id_empresa', $id)->get();
+        $productos = Productos::where('id_empresa', $idDes)->get();
         $rubros = Rubro::all();
         $categorias = Categoria::all();
         $monedas = Monedas::all();
@@ -78,20 +84,17 @@ class HomeController extends Controller
             'categorias' => $categorias,
             'monedas' => $monedas,
             'medidas' => $medidas,
-            'idempresas' => $id
+            'idempresas' => $idDes
         ]);
     }
     public function agreProd($id, Request $data)
     {
-
-        $Emp = Empresas::where('id_empresa', $id)->first();
-
+        $idDes = Crypt::decryptString($id);
         $direcion = '';
         if ($data->hasFile('imagen_producto')) {
             $file = $data->file('imagen_producto');
-            $WithoutCar = $Emp->razon_social_empresa;
-            $path = preg_replace('/[0-9\@\.\;\" "]+/', '', $WithoutCar);
-            $endPath = 'storage/images/producto/' . $path . '/';
+            $endPath = 'storage/images/producto/' . $idDes . '/';
+            
             $fileName = time() . '-' . $file->getClientOriginalName();
             $uploadSuccess = $data->file('imagen_producto')->move($endPath, $fileName);
             $direcion = $endPath . $fileName;
@@ -110,13 +113,13 @@ class HomeController extends Controller
             'id_unidad_medida'      => $data->id_unidad_medida,
             'id_moneda'             => $data->id_moneda,
             'estado'                => 'inactivo',
-            'id_empresa'            => $id,
-            'id_user'               => Auth::id(),
+            'id_empresa'            => $idDes,
         ]);
         return redirect()->route('home');
     }
     public function oneProd($id)
     {
+        $idDes =Crypt::decryptString($id);
         $empresas = DB::table('grupo_empresa_user')
             ->join('empresas', 'grupo_empresa_user.id_empresa', '=', 'empresas.id_empresa')
             ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
@@ -129,7 +132,7 @@ class HomeController extends Controller
             ->where('id_user', Auth::id(),)->get();
 
 
-        $productoEdit = Productos::where('id_producto', $id)->first();
+        $productoEdit = Productos::where('id_producto', $idDes)->first();
 
         $rubros = Rubro::all();
         $categorias = Categoria::all();
@@ -147,18 +150,20 @@ class HomeController extends Controller
     }
     public function eliminarProd($id)
     {
-        Productos::where('id_producto', $id)->update(['estado' => 'eliminado']);
+        $idDes =Crypt::decryptString($id);
+        Productos::where('id_producto', $idDes)->update(['estado' => 'eliminado']);
         return redirect()->route('home');
     }
     public function observadoProd($id)
     {
-        Productos::where('id_producto', $id)->update(['estado' => 'observado']);
+        $idDes =Crypt::decryptString($id);
+        Productos::where('id_producto', $idDes)->update(['estado' => 'observado']);
         return redirect()->route('home');
     }
     public function publicarProd($id)
     {
-
-        Productos::where('id_producto', $id)->update(['estado' => 'activo']);
+        $idDes =Crypt::decryptString($id);
+        Productos::where('id_producto', $idDes)->update(['estado' => 'activo']);
         return redirect()->route('home');
     }
     public function listProdT()
@@ -192,27 +197,30 @@ class HomeController extends Controller
     }
     public function updateProd($id, Request $data)
     {
-        $empresas = DB::table('grupo_empresa_user')
-            ->join('empresas', 'grupo_empresa_user.id_empresa', '=', 'empresas.id_empresa')
-            ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
-            ->select('empresas.*')
-            ->where('id_user', Auth::id(),)->get();
-
-    
+        $idDes =Crypt::decryptString($id);
         $direcion = '';
         if ($data->hasFile('imagen_producto')) {
             $file = $data->file('imagen_producto');
-            $WithoutCar = $empresas[0]->razon_social_empresa;
-            $path = preg_replace('/[0-9\@\.\;\" "]+/', '', $WithoutCar);
-            $endPath = 'storage/images/producto/' . $path . '/';
+            $endPath = 'storage/images/producto/' .  $idDes . '/';
+
+            // if(File::exists($endPath))
+            // {
+            //     File::delete($endPath);
+            // }
             $fileName = time() . '-' . $file->getClientOriginalName();
             $uploadSuccess = $data->file('imagen_producto')->move($endPath, $fileName);
             $direcion = $endPath . $fileName;
         }
+        if (strlen($direcion) < 5){
+            $direcion =$data->imagen_producto;
+        }
+        else {
+            $direcion = URL($direcion);
+        }
         Productos::where('id_producto', $data->id_producto)->update([
             'cantidad_disponible'   => $data->cantidad_disponible ?? '',
             'nombre_producto'       => $data->nombre_producto,
-            'imagen_producto'       => URL($direcion),
+            'imagen_producto'       => $direcion,
             'descripcion_producto'  => $data->descripcion_producto,
             'precio_producto'       => $data->precio_producto,
             'codigo_nandina'        => $data->codigo_nandina,
@@ -222,15 +230,15 @@ class HomeController extends Controller
             'id_categoria'          => $data->id_categoria,
             'id_unidad_medida'      => $data->id_unidad_medida,
             'id_moneda'             => $data->id_moneda,
-            'id_empresa'            => $id,
+            'id_empresa'            => $idDes,
             'estado'                => 'inactivo',
-            'id_user'               => Auth::id(),
         ]);
         return redirect()->route('home');
     }
 
     /////////////////////////////////   //////////////////////////////  //////////////////////////////////
     public function listgrupRubEmp($id){
+        $idDes = Crypt::decryptString($id);
         $empresas = DB::table('grupo_empresa_user')
             ->join('empresas', 'grupo_empresa_user.id_empresa', '=', 'empresas.id_empresa')
             ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
@@ -248,14 +256,14 @@ class HomeController extends Controller
             ->join('empresas', 'grupo_rubro.id_empresa', '=', 'empresas.id_empresa')
             ->join('rubro', 'grupo_rubro.id_rubro', '=', 'rubro.id_rubro')
             ->select('grupo_rubro.id','empresas.id_empresa','empresas.razon_social_empresa','rubro.id_rubro','rubro.nombre_rubro','grupo_rubro.created_at')
-            ->where('grupo_rubro.id_empresa',$id)->get();
+            ->where('grupo_rubro.id_empresa',$idDes)->get();
         $rubros = Rubro::all();
         return view('admin.gruporubro', [
             'empresas' => $empresas,
             'roles' => $rol,
             'rubros' => $rubros,
             'gruporubros'   => $gruporubros,
-            'id_empresa'    => $id,
+            'id_empresa'    =>  $idDes,
         ]);
     }
     public function agreGrupRubro(Request $data){
@@ -266,7 +274,8 @@ class HomeController extends Controller
         return redirect()->route('home');
     }
     public function eliminarGrupoRubro($id){
-        GrupoRubro::where('id', $id)->delete();
+        $idDes =Crypt::decryptString($id);
+        GrupoRubro::where('id', $idDes)->delete();
         return redirect()->route('home');
     }
 
@@ -297,6 +306,7 @@ class HomeController extends Controller
     }
     public function oneEmp($id)
     {
+        $idDes = Crypt::decryptString($id);
         $empresas = DB::table('grupo_empresa_user')
             ->join('empresas', 'grupo_empresa_user.id_empresa', '=', 'empresas.id_empresa')
             ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
@@ -310,7 +320,7 @@ class HomeController extends Controller
 
 
 
-        $empresasEdit = Empresas::where('id_empresa', $id)->first();
+        $empresasEdit = Empresas::where('id_empresa', $idDes)->first();
 
 
         return view('admin.onempresa', [
@@ -321,18 +331,17 @@ class HomeController extends Controller
     }
     public function updateEmp($id, Request $data)
     {
+        $idDes =Crypt::decryptString($id);
         $direcion = '';
         if ($data->hasFile('imagen_empresa')) {
             $file = $data->file('imagen_empresa');
-            $WithoutCar = $data->razon_social_empresa;
-            $path = preg_replace('/[0-9\@\.\;\" "]+/', '', $WithoutCar);
-            $endPath = 'storage/images/empresas/' . $path . '/';
+            $endPath = 'storage/images/empresas/' . $id . '/';
             $fileName = time() . '-' . $file->getClientOriginalName();
             $uploadSuccess = $data->file('imagen_empresa')->move($endPath, $fileName);
             $direcion = $endPath . $fileName;
         }
 
-        Empresas::where('id_empresa', $id)->update([
+        Empresas::where('id_empresa', $idDes)->update([
             'razon_social_empresa'  => $data->razon_social_empresa ?? '',
             'descripcion_empresa'   => $data->descripcion_empresa,
             'nit'                   => $data->nit ?? '',
@@ -355,12 +364,14 @@ class HomeController extends Controller
 
     public function eliminarEmp($id)
     {
-        Empresas::where('id_empresa', $id)->update(['estado' => 'inactivo']);
+        $idDes =Crypt::decryptString($id);
+        Empresas::where('id_empresa', $idDes)->update(['estado' => 'inactivo']);
         return redirect()->route('home');
     }
     public function publicarEmp($id)
     {
-        Empresas::where('id_empresa', $id)->update(['estado' => 'activo']);
+        $idDes =Crypt::decryptString($id);
+        Empresas::where('id_empresa', $idDes)->update(['estado' => 'activo']);
         return redirect()->route('home');
     }
 
@@ -369,6 +380,7 @@ class HomeController extends Controller
     ////////////////////////////////////////////////////////////////
     public function listRubro()
     {
+        
         $empresas = DB::table('grupo_empresa_user')
             ->join('empresas', 'grupo_empresa_user.id_empresa', '=', 'empresas.id_empresa')
             ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
@@ -392,6 +404,7 @@ class HomeController extends Controller
     }
     public function oneRubro($id)
     {
+        $idDes = Crypt::decryptString($id);
         $empresas = DB::table('grupo_empresa_user')
             ->join('empresas', 'grupo_empresa_user.id_empresa', '=', 'empresas.id_empresa')
             ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
@@ -405,7 +418,7 @@ class HomeController extends Controller
 
 
 
-        $rubroEdit = Rubro::where('id_rubro', $id)->first();
+        $rubroEdit = Rubro::where('id_rubro', $idDes)->first();
 
 
         return view('admin.onerubro', [
@@ -416,6 +429,7 @@ class HomeController extends Controller
     }
     public function updateRubro($id, Request $data)
     {
+        $idDes =Crypt::decryptString($id);
         $direcion = '';
         if ($data->hasFile('imagen_rubro')) {
             $file = $data->file('imagen_rubro');
@@ -424,7 +438,7 @@ class HomeController extends Controller
             $uploadSuccess = $data->file('imagen_rubro')->move($endPath, $fileName);
             $direcion = $endPath . $fileName;
         }
-        Rubro::where('id_rubro', $id)->update([
+        Rubro::where('id_rubro', $idDes)->update([
             'nombre_rubro'  => $data->nombre_rubro,
             'abreviacion_rubro'   => $data->abreviacion_rubro,
             'imagen_rubro'        => URL($direcion),
@@ -435,16 +449,18 @@ class HomeController extends Controller
 
     public function eliminarRubro($id)
     {
+        $idDes =Crypt::decryptString($id);
         Rubro::where('id_rubro', $id)->update(['estado' => 'eliminado']);
         return redirect()->route('home');
     }
     public function estadoRubro($id)
     {
-        $rubro = Rubro::where('id_rubro', $id)->first();
+        $idDes =Crypt::decryptString($id);
+        $rubro = Rubro::where('id_rubro', $idDes)->first();
         if ($rubro->estado == 'activo') {
-            Rubro::where('id_rubro', $id)->update(['estado' => 'inactivo']);
+            Rubro::where('id_rubro', $idDes)->update(['estado' => 'inactivo']);
         } else {
-            Rubro::where('id_rubro', $id)->update(['estado' => 'activo']);
+            Rubro::where('id_rubro', $idDes)->update(['estado' => 'activo']);
         }
         return redirect()->route('home');
     }
@@ -475,6 +491,7 @@ class HomeController extends Controller
     }
     public function oneCategoria($id)
     {
+        $idDes =Crypt::decryptString($id);
         $empresas = DB::table('grupo_empresa_user')
             ->join('empresas', 'grupo_empresa_user.id_empresa', '=', 'empresas.id_empresa')
             ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
@@ -487,7 +504,7 @@ class HomeController extends Controller
             ->where('id_user', Auth::id(),)->get();
 
 
-        $categoriaEdit = Categoria::where('id_categoria', $id)->first();
+        $categoriaEdit = Categoria::where('id_categoria', $idDes)->first();
 
 
         return view('admin.onecategoria', [
@@ -498,7 +515,8 @@ class HomeController extends Controller
     }
     public function updateCategoria($id, Request $data)
     {
-        Categoria::where('id_categoria', $id)->update([
+        $idDes =Crypt::decryptString($id);
+        Categoria::where('id_categoria', $idDes)->update([
             'nombre_rubro'  => $data->nombre_rubro,
             'abreviacion_rubro'   => $data->abreviacion_rubro,
             'id_rubro'        => $data->id_rubro,
@@ -508,16 +526,18 @@ class HomeController extends Controller
 
     public function eliminarCategoria($id)
     {
-        Categoria::where('id_categoria', $id)->update(['estado' => 'eliminado']);
+        $idDes =Crypt::decryptString($id);
+        Categoria::where('id_categoria', $idDes)->update(['estado' => 'eliminado']);
         return redirect()->route('home');
     }
     public function estadoCategoria($id)
     {
-        $categoria = Categoria::where('id_categoria', $id)->first();
+        $idDes =Crypt::decryptString($id);
+        $categoria = Categoria::where('id_categoria', $idDes)->first();
         if ($categoria->estado == 'activo') {
-            Categoria::where('id_categoria', $id)->update(['estado' => 'inactivo']);
+            Categoria::where('id_categoria', $idDes)->update(['estado' => 'inactivo']);
         } else {
-            Categoria::where('id_categoria', $id)->update(['estado' => 'activo']);
+            Categoria::where('id_categoria', $idDes)->update(['estado' => 'activo']);
         }
         return redirect()->route('home');
     }

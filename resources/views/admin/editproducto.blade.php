@@ -12,16 +12,21 @@
         <!-- row -->
         <div class="row">
             <div class="col-xl-12 col-lg-12">
+                @if (session('status'))
+                    <h6 class="alert alert-succes">{{session('status')}}</h6>
+                @endif
                 <div class="card">
                     <div class="modal-header">
                         <h5 class="modal-title">Agregar Producto</h5>
                         <a href="javascript:void(0);" class="btn-close" data-bs-dismiss="modal"></a>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" action="{{ URL('update-prod/' . $empresas[0]->id_empresa) }}"
+                        <form method="POST" action="{{ URL('update-prod/' . Crypt::encryptString($empresas[0]->id_empresa)) }}"
                             enctype="multipart/form-data" autocomplete="off">
-                            @csrf
+                            @csrf   
+                            @method('PUT')
                             <input type="hidden" value="{{ $productoEdit->id_producto }}" id="id_producto" name="id_producto" />
+                            <input type="hidden" value="{{$productoEdit->imagen_producto}}" id="imagen_producto" name="imagen_producto" />
                             <div class="row">
                                 <div class="mb-3 col-md-6">
                                     <label class="text-black font-w500">Rubro</label>
@@ -126,10 +131,13 @@
                                     <div class="form-file ">
                                         <input accept="image/png,image/jpeg,image/jpg" type="file"
                                             class="form-file-input form-control focus:outline-none input-image-2"
-                                            name="imagen_producto" id="imagen_producto" required>
+                                            name="imagen_producto" id="imagen_producto"  >
+                                            
                                     </div>
+                                    
                                 </div>
                                 <p class="text-image-2"> </p>
+                                <img src="{{$productoEdit->imagen_producto}}" alt="Imagen">
                             </div>
                             <div class="mb-3 row">
                                 <div class="col-lg-8 ms-auto">

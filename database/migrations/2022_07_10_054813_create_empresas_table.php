@@ -16,19 +16,19 @@ class CreateEmpresasTable extends Migration
         Schema::create('empresas', function (Blueprint $table) {
             $table->integer('id_empresa');
             $table->string('razon_social_empresa');
-            $table->text('descripcion_empresa');
+            $table->text('descripcion_empresa')->default('');
             $table->bigInteger('nit');
             $table->bigInteger('matricula');
-            $table->bigInteger('telefono');
-            $table->bigInteger('celular_1');
-            $table->string('nombre_1');
-            $table->bigInteger('celular_2');
-            $table->string('nombre_2');
-            $table->string('email');
-            $table->string('pag_web');
+            $table->bigInteger('telefono')->default(0); 
+            $table->bigInteger('celular_1')->default(0);
+            $table->string('nombre_1')->default('');
+            $table->bigInteger('celular_2')->default(0);
+            $table->string('nombre_2')->default('');
+            $table->string('email')->default('');
+            $table->string('pag_web')->default('');
             $table->string('ruex');
             $table->boolean('estado_ruex')->default(false);
-            $table->text('imagen_empresa');
+            $table->text('imagen_empresa')->default('');
             $table->text('logo_empresa')->default('');
             $table->text('direccion')->default('');
             $table->text('ubicacion')->default('');

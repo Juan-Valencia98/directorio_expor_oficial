@@ -17,7 +17,7 @@
                         <a href="javascript:void(0);" class="btn-close" data-bs-dismiss="modal"></a>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" action="{{ URL('update-empr/' . $empresasEdit->id_empresa) }}"
+                        <form method="POST" action="{{ URL('update-empr/' . Crypt::encryptString($empresasEdit->id_empresa)) }}"
                             enctype="multipart/form-data" autocomplete="off">
                             @csrf
                             <div class="mb-3">
@@ -25,23 +25,23 @@
                                     Empresa</label>
                                 <input type="text" class="form-control focus:outline-none"
                                     name="razon_social_empresa" id="razon_social_empresa" value="{{$empresasEdit->razon_social_empresa}}"
-                                    required>
+                                    readonly>
                             </div>
                             <div class="mb-3">
                                 <label class="text-black font-w500">Descripcion</label>
-                                <textarea class="form-control focus:outline-none" rows="4" name="descripcion_empresa" 
-                                    id="descripcion_empresa" required>{{$empresasEdit->descripcion_empresa}}</textarea>
+                                <textarea class="form-control" rows="4" name="descripcion_empresa" 
+                                    id="descripcion_empresa" >{{$empresasEdit->descripcion_empresa}}</textarea>
                             </div>
                             <div class="row">
                                 <div class="mb-3 col-md-6">
                                     <label class="text-black font-w500 ">Nit</label>
                                     <input type="text" class="form-control focus:outline-none focus:ring-2 input-number"
-                                        name="nit" id="nit"  value="{{$empresasEdit->nit}}" required>
+                                        name="nit" id="nit"  value="{{$empresasEdit->nit}}" readonly>
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label class="text-black font-w500 ">Matricula</label>
                                     <input type="text" class="form-control focus:outline-none focus:ring-2 input-number"
-                                        name="matricula" id="matricula"  value="{{$empresasEdit->matricula}}" required>
+                                        name="matricula" id="matricula"  value="{{$empresasEdit->matricula}}" readonly>
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label class="text-black font-w500 ">Telefono</label>
@@ -81,7 +81,7 @@
                                 <div class="mb-3 col-md-6">
                                     <label class="text-black font-w500 ">Ruex</label>
                                     <input type="text" class="form-control focus:outline-none focus:ring-2 input-number" name="ruex"
-                                        id="ruex" value="{{$empresasEdit->ruex}}" required>
+                                        id="ruex" value="{{$empresasEdit->ruex}}" readonly>
                                 </div>
                                 
     

@@ -259,12 +259,12 @@
                             <span class="nav-text">Inicio</span>
                         </a>
                     </li>
-                    {{-- @foreach ($roles as $rol)
+                    @foreach ($roles as $rol)
                         @if ($rol->id_rol == '2')
                             <li>
                                 <h5 class="nav-text"> {{ $rol->nombre_rol }}</h5>
-                            </li> --}}
-                            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                            </li>
+                            {{-- <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                                     <i class="flaticon-050-info"></i>
                                     <span class="nav-text">Rubros</span>
                                 </a>
@@ -272,15 +272,16 @@
                                     @foreach ($empresas as $empresa)
                                         @if ($empresa->estado == 'inactivo')
                                             <li><a
-                                                    href="{{ URL('list-grupo-rubro-admin/' . $empresa->id_empresa) }}">
+                                                    href="{{ URL('list-grupo-rubro-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
                                                     {{ $empresa->razon_social_empresa }}
                                                     <span class="badge badge-warning">Pendiente</span>
                                                 </a>
                                             </li>
-                                        @elseif ($empresa->id_estado_empresa == '5')
-                                            <li><a href="#">
+                                        @elseif ($empresa->id_estado_empresa == '4' && $empresa->estado == 'activo')
+                                            <li><a
+                                                    href="{{ URL('list-grupo-rubro-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
                                                     {{ $empresa->razon_social_empresa }}
-                                                    <span class="badge badge-secondary">Rechazado</span>
+                                                    <span class="badge badge-success">Activo</span>
                                                 </a>
                                             </li>
                                         @elseif ($empresa->estado_ruex == '0')
@@ -289,17 +290,16 @@
                                                     <span class="badge badge-secondary">Sin Ruex</span>
                                                 </a>
                                             </li>
-                                        @elseif ($empresa->estado == 'activo')
-                                            <li><a
-                                                    href="{{ URL('list-grupo-rubro-admin/' . $empresa->id_empresa) }}">
+                                        @else
+                                            <li><a href="#">
                                                     {{ $empresa->razon_social_empresa }}
-                                                    <span class="badge badge-success">Activo</span>
+                                                    <span class="badge badge-secondary">Rechazado</span>
                                                 </a>
                                             </li>
                                         @endif
                                     @endforeach
                                 </ul>
-                            </li>
+                            </li> --}}
                             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                                     <i class="flaticon-041-graph"></i>
                                     <span class="nav-text">Empresas</span>
@@ -307,27 +307,29 @@
                                 <ul aria-expanded="false">
                                     @foreach ($empresas as $empresa)
                                         @if ($empresa->estado == 'inactivo')
-                                            <li><a href="{{ URL('one-emp-admin/' . $empresa->id_empresa) }}">
+                                            <li><a
+                                                    href="{{ URL('one-emp-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
                                                     {{ $empresa->razon_social_empresa }}
                                                     <span class="badge badge-warning">Pendiente</span>
                                                 </a>
                                             </li>
-                                        @elseif ($empresa->id_estado_empresa == '5')
-                                            <li><a href="#">
+                                        @elseif ($empresa->id_estado_empresa == '4' && $empresa->estado == 'activo')
+                                            <li><a
+                                                    href="{{ URL('one-emp-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
                                                     {{ $empresa->razon_social_empresa }}
-                                                    <span class="badge badge-secondary">Rechazado</span>
+                                                    <span class="badge badge-success">Activo</span>
                                                 </a>
                                             </li>
-                                        @elseif ($empresa->estado_ruex == '0')
+                                            {{-- @elseif ($empresa->estado_ruex == '0')
                                             <li><a href="#">
                                                     {{ $empresa->razon_social_empresa }}
                                                     <span class="badge badge-secondary">Sin Ruex</span>
                                                 </a>
-                                            </li>
-                                        @elseif ($empresa->estado == 'activo')
-                                            <li><a href="{{ URL('one-emp-admin/' . $empresa->id_empresa) }}">
+                                            </li> --}}
+                                        @else
+                                            <li><a href="#">
                                                     {{ $empresa->razon_social_empresa }}
-                                                    <span class="badge badge-success">Activo</span>
+                                                    <span class="badge badge-secondary">Rechazado</span>
                                                 </a>
                                             </li>
                                         @endif
@@ -347,32 +349,27 @@
                                                     <span class="badge badge-warning">Pendiente</span>
                                                 </a>
                                             </li>
-                                        @elseif ($empresa->id_estado_empresa == '5')
+                                        @elseif ($empresa->id_estado_empresa == '4' && $empresa->estado == 'activo')
+                                            <li><a
+                                                    href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
+                                                    {{ $empresa->razon_social_empresa }}
+                                                    <span class="badge badge-success">Activo</span>
+                                                </a>
+                                            </li>
+                                        @else
                                             <li><a href="#">
                                                     {{ $empresa->razon_social_empresa }}
                                                     <span class="badge badge-secondary">Rechazado</span>
-                                                </a>
-                                            </li>
-                                        {{-- @elseif ($empresa->estado_ruex == 'false')
-                                            <li><a href="#">
-                                                    {{ $empresa->razon_social_empresa }}
-                                                    <span class="badge badge-secondary">Sin Ruex</span>
-                                                </a>
-                                            </li> --}}
-                                        @elseif ($empresa->estado == 'activo')
-                                            <li><a href="{{ URL('list-prod-admin/' . $empresa->id_empresa) }}">
-                                                    {{ $empresa->razon_social_empresa }}
-                                                    <span class="badge badge-success">Activo</span>
                                                 </a>
                                             </li>
                                         @endif
                                     @endforeach
                                 </ul>
                             </li>
-                        {{-- @else
+                        @else
                             <li>
                                 <h5 class="nav-text"> {{ $rol->nombre_rol }}</h5>
-                            </li> --}}
+                            </li>
                             <li><a href="{{ URL('list-emp-admin') }}" class="ai-icon" aria-expanded="false">
                                     <i class="flaticon-013-checkmark"></i>
                                     <span class="nav-text">Empresas</span>
@@ -394,8 +391,8 @@
                                     <span class="nav-text">Categorias</span>
                                 </a>
                             </li>
-                        {{-- @endif
-                    @endforeach --}}
+                        @endif
+                    @endforeach
 
 
 

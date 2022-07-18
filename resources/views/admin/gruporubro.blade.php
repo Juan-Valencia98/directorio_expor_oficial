@@ -42,7 +42,7 @@
                                             <td>{{ $data->created_at }}</td>
                                             <td>
                                                 <div class="d-flex">
-                                                    <a href="{{ URL('eliminar-grupo-rubros-admin/' . $data->id) }}"
+                                                    <a href="{{ URL('eliminar-grupo-rubros-admin/' . Crypt::encryptString($data->id)) }}"
                                                         class="btn btn-danger shadow btn-xs sharp"><i
                                                             class="fa fa-trash"></i></a>
                                                 </div>

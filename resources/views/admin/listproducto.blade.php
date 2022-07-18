@@ -126,7 +126,7 @@
                                     <td class="text-secondary font-w500">Bs. {{ $producto->precio_producto }}</td>
                                     <td>
                                         <div class="d-flex">
-                                            <a href="{{ URL('one-prod-admin/'.$producto->id_producto) }}">
+                                            <a href="{{ URL('one-prod-admin/'.Crypt::encryptString($producto->id_producto)) }}">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -166,7 +166,7 @@
                     <a href="javascript:void(0);" class="btn-close" data-bs-dismiss="modal"></a>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ URL('crea-prod/' . $idempresas) }}"
+                    <form method="POST" action="{{ URL('crea-prod/' . Crypt::encryptString($idempresas)) }}"
                         enctype="multipart/form-data" autocomplete="off">
                         @csrf
                         <div class="mb-3">

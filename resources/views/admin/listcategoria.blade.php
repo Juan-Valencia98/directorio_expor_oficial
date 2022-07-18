@@ -42,10 +42,10 @@
                                                 <td>{{ $data->created_at }}</td>
                                                 <td>
                                                     <div class="d-flex">
-                                                        <a href="{{ URL('one-categorias-admin/' . $data->id_categoria ) }}"
+                                                        <a href="{{ URL('one-categorias-admin/' . Crypt::encryptString($data->id_categoria )) }}"
                                                             class="btn btn-primary shadow btn-xs sharp me-1"><i
                                                                 class="fa fa-pencil"></i></a>
-                                                        <a href="{{ URL('eliminar-categorias-admin/' . $data->id_categoria ) }}"
+                                                        <a href="{{ URL('eliminar-categorias-admin/' . Crypt::encryptString($data->id_categoria )) }}"
                                                             class="btn btn-danger shadow btn-xs sharp"><i
                                                                 class="fa fa-trash"></i></a>
                                                     </div>

@@ -125,9 +125,9 @@
                                                             <span
                                                                 class="badge badge-warning btn-sm ">{{ $prodTod->estado }}</span>
                                                         @endif
-                                                        <a href="{{ URL('one-prod-admin/'.$prodTod->id_producto) }}"
+                                                        <a href="{{ URL('one-prod-admin/'.Crypt::encryptString($prodTod->id_producto)) }}"
                                                             class="btn btn-primary btn-rounded text-white btn-sm ms-2 px-4">Editar</a>
-                                                        <a href="{{ URL('eliminar-prod-admin/'.$prodTod->id_producto) }}"
+                                                        <a href="{{ URL('eliminar-prod-admin/'.Crypt::encryptString($prodTod->id_producto)) }}"
                                                             class="btn btn-outline-danger btn-rounded btn-sm ms-2 px-4">Eliminar</a>
                                                     </div>
                                                 </td>
@@ -199,9 +199,9 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex">
-                                                        <a href="{{ URL('observar-prod-admin/'.$prodAct->id_producto) }}"
+                                                        <a href="{{ URL('observar-prod-admin/'.Crypt::encryptString($prodAct->id_producto)) }}"
                                                             class="btn btn-warning btn-rounded text-white btn-sm ms-2  px-4">Observar</a>
-                                                        <a href="{{ URL('one-prod-admin/'.$prodAct->id_producto) }}"
+                                                        <a href="{{ URL('one-prod-admin/'.Crypt::encryptString($prodAct->id_producto)) }}"
                                                             class="btn btn-primary btn-rounded text-white btn-sm ms-2  px-4">Editar</a>
                                                         
                                                     </div>
@@ -276,10 +276,10 @@
                                                     
                                                     <div class="d-flex">
                                                         
-                                                        <a href="{{ URL('publicar-prod-admin/'.$prodInac->id_producto) }}"
+                                                        <a href="{{ URL('publicar-prod-admin/'.Crypt::encryptString($prodInac->id_producto)) }}"
                                                             class="btn btn-secondary btn-rounded text-white btn-sm px-4">Publicar</a>
                                                         
-                                                        <a href="{{ URL('observar-prod-admin/'.$prodInac->id_producto) }}"
+                                                        <a href="{{ URL('observar-prod-admin/'.Crypt::encryptString($prodInac->id_producto)) }}"
                                                             class="btn btn-warning btn-rounded text-white btn-sm ms-2  px-4">Observar</a>
                                                     </div>
                                                 </td>
@@ -351,9 +351,9 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex">
-                                                        <a href="{{ URL('publicar-prod-admin/'.$prodObs->id_producto) }}"
+                                                        <a href="{{ URL('publicar-prod-admin/'.Crypt::encryptString($prodObs->id_producto)) }}"
                                                             class="btn btn-secondary btn-rounded text-white btn-sm ms-2 px-4">Publicar</a>
-                                                        <a href="{{ URL('eliminar-prod-admin/'.$prodObs->id_producto) }}"
+                                                        <a href="{{ URL('eliminar-prod-admin/'.Crypt::encryptString($prodObs->id_producto)) }}"
                                                             class="btn btn-outline-danger btn-rounded btn-sm ms-2 px-4">Eliminar</a>
                                                     </div>
                                                 </td>

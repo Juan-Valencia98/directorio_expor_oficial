@@ -108,12 +108,12 @@
                                         <td>
                                             @if ($empTod->estado == 'activo')
                                             <div class="d-flex">
-                                                <a href="{{ URL('eliminar-emp-admin/' . $empTod->id_empresa ) }}"
+                                                <a href="{{ URL('eliminar-emp-admin/' . Crypt::encryptString($empTod->id_empresa )) }}"
                                                     class="btn btn-outline-danger btn-rounded btn-sm ms-2 px-4">Pendiente</a>
                                             </div>
                                             @else
                                             <div class="d-flex">
-                                                <a href="{{ URL('publicar-emp-admin/' . $empTod->id_empresa ) }}"
+                                                <a href="{{ URL('publicar-emp-admin/' . Crypt::encryptString($empTod->id_empresa) ) }}"
                                                     class="btn btn-secondary btn-rounded text-white btn-sm px-4">Publicar</a>
                                             </div>
                                             @endif
@@ -182,7 +182,7 @@
                                         </td>
                                         <td>
                                             <div class="d-flex">
-                                                <a href="{{ URL('eliminar-emp-admin/' . $empAct->id_empresa ) }}"
+                                                <a href="{{ URL('eliminar-emp-admin/' . Crypt::encryptString($empAct->id_empresa )) }}"
                                                     class="btn btn-outline-danger btn-rounded btn-sm ms-2 px-4">Pendiente</a>
                                             </div>
                                         </td>
@@ -250,7 +250,7 @@
                                         </td>
                                         <td>
                                             <div class="d-flex">
-                                                <a href="{{ URL('publicar-emp-admin/' . $empInac->id_empresa ) }}"
+                                                <a href="{{ URL('publicar-emp-admin/' . Crypt::encryptString($empInac->id_empresa )) }}"
                                                     class="btn btn-secondary btn-rounded text-white btn-sm px-4">Publicar</a>
                                                 
                                             </div>

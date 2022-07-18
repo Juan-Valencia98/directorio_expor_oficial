@@ -13,6 +13,7 @@ use App\Models\EstadoEmpresas;
 use App\Models\Rol;
 use App\Models\Rubro;
 use App\Models\GrupoRol;
+use App\Models\GrupoRubro;
 use App\Models\GrupoEmpresaUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -75,10 +76,19 @@ class LoginController extends Controller
                             'id_empresa'=>$data->id_empresa
                         ]);
                     }
+                    foreach ( $data->rubros as $rubro ){
+                        $RubroId = GrupoRubro::where([['id_empresa', $data->id_empresa],['id_rubro', $rubro->id_rubro]])->first();
+                        if(!$RubroId) {
+                            GrupoRubro::create([ 
+                                'id_rubro' =>$rubro->id_rubro,
+                                'id_empresa'=>$data->id_empresa
+                            ]);
+                        }
+                    }
                     DB::table('empresas')
                     ->where('id_empresa', $data->id_empresa)
                     ->update([
-                        'matricula'             => $data->matricula??'',
+                        'matricula'             => $data->matricula??0,
                         'ruex'                  => $data->ruex ?? 0,
                         'estado_ruex'           => $data->estado_ruex??false,
                         'id_estado_empresa'     => $data->id_estado_empresa,
@@ -135,8 +145,8 @@ class LoginController extends Controller
                             'id_empresa'            => $data->id_empresa,
                             'razon_social_empresa'  => $data->razon_social??'',
                             'descripcion_empresa'   => '',
-                            'nit'                   => $data->nit??'',
-                            'matricula'             => $data->matricula??'',
+                            'nit'                   => $data->nit??0,
+                            'matricula'             => $data->matricula??0,
                             'telefono'              => $data->telefono??0,
                             'celular_1'             => $data->celular??0,
                             'nombre_1'              => '',

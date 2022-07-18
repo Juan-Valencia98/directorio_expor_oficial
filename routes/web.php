@@ -32,7 +32,8 @@ Route::get('list-prod-admin/{id}', [App\Http\Controllers\HomeController::class, 
 Route::post('crea-prod/{id}', [App\Http\Controllers\HomeController::class, 'agreProd'])->name('crea-prod');
 
 Route::get('list-prod-admin', [App\Http\Controllers\HomeController::class, 'listProdT'])->name('list-prod-admin');
-Route::post('update-prod/{id}', [App\Http\Controllers\HomeController::class, 'updateProd'])->name('update-prod');
+Route::put('update-prod/{id}', [App\Http\Controllers\HomeController::class, 'updateProd'])->name('update-prod');
+
 Route::get('one-prod-admin/{id}', [App\Http\Controllers\HomeController::class, 'oneProd'])->name('one-prod-admin');
 Route::get('eliminar-prod-admin/{id}', [App\Http\Controllers\HomeController::class, 'eliminarProd'])->name('eliminar-prod-admin');
 Route::get('observar-prod-admin/{id}', [App\Http\Controllers\HomeController::class, 'observadoProd'])->name('observar-prod-admin');
