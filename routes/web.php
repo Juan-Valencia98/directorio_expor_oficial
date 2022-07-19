@@ -55,7 +55,7 @@ Route::get('estado-categorias-admin/{id}', [App\Http\Controllers\HomeController:
 
 Route::get('list-emp-admin', [App\Http\Controllers\HomeController::class, 'listEmp'])->name('list-emp-admin');
 Route::get('one-emp-admin/{id}', [App\Http\Controllers\HomeController::class, 'oneEmp'])->name('one-emp-admin');
-Route::post('update-empr/{id}', [App\Http\Controllers\HomeController::class, 'updateEmp'])->name('update-empr');
+Route::put('update-empr/{id}', [App\Http\Controllers\HomeController::class, 'updateEmp'])->name('update-empr');
 Route::get('eliminar-emp-admin/{id}', [App\Http\Controllers\HomeController::class, 'eliminarEmp'])->name('eliminar-emp-admin');
 Route::get('publicar-emp-admin/{id}', [App\Http\Controllers\HomeController::class, 'publicarEmp'])->name('publicar-emp-admin');
 

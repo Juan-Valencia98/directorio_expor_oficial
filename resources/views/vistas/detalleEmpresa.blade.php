@@ -69,7 +69,7 @@
                                         <div class="overlay"></div>
                                     </div>
                                     <div class="product-details text-center">
-                                        <a href="{{ URL('detalle-producto/' . $producto->id_producto) }}">
+                                        <a href="{{ URL('detalle-producto/' . Crypt::encryptString($producto->id_producto)) }}">
                                             <h5 class="product-title">
                                                 {{ $producto->nombre_producto }}
                                             </h5>
@@ -86,7 +86,7 @@
                                         </div>
                                         <div class="btn-add-to-cart-wrapper">
                                             <a class="btn btn-default btn-xs btn-add-to-cart"
-                                                href="{{ URL('detalle-producto/' . $producto->id_producto) }}">Mas
+                                                href="{{ URL('detalle-producto/' . Crypt::encryptString($producto->id_producto)) }}">Mas
                                                 Detalle</a>
                                         </div>
                                     </div>

@@ -96,16 +96,8 @@
                                             <h3>Descripcion del producto</h3>
                                             <p>
                                                 {{ $detProducto->descripcion_producto }}
-
                                             </p>
-                                            <p>
-                                                One Lorem ipsum dolor sit amet, consectetur
-                                                adipisicing elit. Quaerat, iste, architecto ullam
-                                                tenetur quia nemo ratione tempora consectetur quos
-                                                minus voluptates nisi hic alias libero explicabo
-                                                reiciendis sint ut quo nulla ipsa aliquid neque
-                                                molestias et qui sunt. Odit, molestiae.
-                                            </p>
+                                           
                                         </div>
                                         <div class="tab-pane fade" id="tab2">
                                             <table class="table table-striped">
@@ -161,7 +153,7 @@
                                                 <div class="overlay"></div>
                                             </div>
                                             <div class="product-details text-center">
-                                                <a href="{{ URL('detalle-producto/'.$producto->id_producto) }}">
+                                                <a href="{{ URL('detalle-producto/'.Crypt::encryptString($producto->id_producto)) }}">
                                                     <h5 class="product-title">
                                                         {{$producto->nombre_producto}}
                                                     </h5>
@@ -177,7 +169,7 @@
                                                             class="amount">{{$producto->precio_producto.' '.$producto->abrv_moneda}}</span></ins>
                                                 </div>
                                                 <div class="btn-add-to-cart-wrapper">
-                                                    <a class="btn btn-default btn-xs btn-add-to-cart" href="{{ URL('detalle-producto/'.$producto->id_producto) }}">Mas Detalle</a>
+                                                    <a class="btn btn-default btn-xs btn-add-to-cart" href="{{ URL('detalle-producto/'.Crypt::encryptString($producto->id_producto)) }}">Mas Detalle</a>
                                                 </div>
                                             </div>
                                         </div>

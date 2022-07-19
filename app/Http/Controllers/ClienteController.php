@@ -13,19 +13,29 @@ use App\Models\GrupoRubro;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Crypt;
+use Carbon\Carbon;
+
 class ClienteController extends Controller
 {
     public function index(){
         $productos = DB::table('productos')->get();
-
+        $fechaActual = Carbon::now();
+        $anioActual = substr($fechaActual,0,4);
+        $mesActual = substr($fechaActual,5,2);
+        $diaActual = substr($fechaActual,8,2);
         foreach ($productos as $producto) {
-            DB::table('productos')
-            ->where('id_producto',) 
-            ->update([
-                'estado'           => 'eliminado',
-            ]);
+            $anio = substr($producto->created_at,0,4);
+            $mes = substr($producto->created_at,5,2);
+            $dia = substr($producto->created_at,8,2);
+            if ($anio != $anioActual && $mes == $mesActual){
+                DB::table('productos')
+                ->where('id_producto',$producto->id_producto) 
+                ->update([
+                    'estado'           => 'eliminado',
+                ]);
+            }
         }
-      
         return view('vistas.inicio');
     }
 
@@ -47,6 +57,7 @@ class ClienteController extends Controller
         ]);
     }
     public function oneProducto($id){
+        $idDes = Crypt::decryptString($id);
         $detProducto = DB::table('productos')
                     ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
                     ->join('monedas', 'monedas.id_moneda', '=', 'productos.id_moneda')
@@ -54,7 +65,7 @@ class ClienteController extends Controller
                     ->where([
                         ['productos.estado', 'activo'],
                         ['empresas.estado', 'activo'],
-                        ['productos.id_producto',$id]
+                        ['productos.id_producto',$idDes]
                     ])->orderByDesc('productos.updated_at','empresas.updated_at')->first();
         $productos = DB::table('productos')
                         ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
@@ -65,9 +76,10 @@ class ClienteController extends Controller
                             ['empresas.estado', 'activo'],
                             ['productos.id_rubro',$detProducto->id_rubro]
                         ])->orderByDesc('productos.updated_at','empresas.updated_at')->get();
+                        
         return view('vistas.detalleProducto',[
             'detProducto' => $detProducto,
-            'productos' => $productos
+            'productos' => $productos,
         ]);
     }
 
@@ -86,10 +98,11 @@ class ClienteController extends Controller
         ]);
     }
     public function oneEmpresa($id){
+        $idDes = Crypt::decryptString($id);
         $detEmpresa = DB::table('empresas')
                     ->where([
                         ['estado', 'activo'],
-                        ['id_empresa',$id]
+                        ['id_empresa',$idDes]
                     ])->first();
         $productos = DB::table('productos')
                         ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
@@ -98,7 +111,7 @@ class ClienteController extends Controller
                         ->where([
                             ['productos.estado', 'activo'],
                             ['empresas.estado', 'activo'],
-                            ['productos.id_empresa',$id]
+                            ['productos.id_empresa',$idDes]
                         ])->orderByDesc('productos.updated_at','empresas.updated_at')->get();
         return view('vistas.detalleEmpresa',[
             'detEmpresa' => $detEmpresa,
@@ -106,6 +119,7 @@ class ClienteController extends Controller
         ]);
     }
     public function listaProductosEmpresa($id){
+        $idDes = Crypt::decryptString($id);
         $productos = DB::table('productos')
         ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
         ->join('monedas', 'monedas.id_moneda', '=', 'productos.id_moneda')
@@ -113,7 +127,7 @@ class ClienteController extends Controller
         ->where([
             ['productos.estado', 'activo'],
             ['empresas.estado', 'activo'],
-            ['empresas.id_empresa',$id]
+            ['empresas.id_empresa',$idDes]
         ])->orderByDesc('productos.updated_at','empresas.updated_at')->get();
 
 
@@ -134,7 +148,15 @@ class ClienteController extends Controller
         ->where([
             ['estado', 'activo']
         ])->orderByDesc('updated_at')->paginate(3, ['*'], 'page', null);
-
+        // $rubros = DB::table('productos')
+        //                 ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
+        //                 ->join('rubro', 'rubros.id_rubro', '=', 'productos.id_rubro')
+        //                 ->select('rubro.*')
+        //                 ->where([
+        //                     ['productos.estado', 'activo'],
+        //                     ['empresas.estado', 'activo'],
+        //                     ['rubro.estado','activo'],
+        //                 ])->orderByDesc('productos.updated_at','empresas.updated_at')->get();
 
         return view ('vistas.listarubro',[
             'empresas' => $empresas,
@@ -142,10 +164,11 @@ class ClienteController extends Controller
         ]);
     }
     public function oneRubro($id){
+        $idDes = Crypt::decryptString($id);
         $detEmpresa = DB::table('empresas')
                     ->where([
                         ['estado', 'activo'],
-                        ['id_empresa',$id]
+                        ['id_empresa',$idDes]
                     ])->first();
         $productos = DB::table('productos')
                         ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
@@ -154,7 +177,7 @@ class ClienteController extends Controller
                         ->where([
                             ['productos.estado', 'activo'],
                             ['empresas.estado', 'activo'],
-                            ['productos.id_empresa',$id]
+                            ['productos.id_empresa',$idDes]
                         ])->orderByDesc('productos.updated_at','empresas.updated_at')->get();
         return view('vistas.detalleEmpresa',[
             'detEmpresa' => $detEmpresa,
@@ -162,6 +185,7 @@ class ClienteController extends Controller
         ]);
     }
     public function listaProductosRubro($id){
+        $idDes = Crypt::decryptString($id);
         $productos = DB::table('productos')
         ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
         ->join('monedas', 'monedas.id_moneda', '=', 'productos.id_moneda')
@@ -170,7 +194,7 @@ class ClienteController extends Controller
         ->where([
             ['productos.estado', 'activo'],
             ['empresas.estado', 'activo'],
-            ['productos.id_rubro',$id]
+            ['productos.id_rubro',$idDes]
         ])->orderByDesc('productos.updated_at','empresas.updated_at')->get();
 
         return view ('vistas.productos_emp_rub',[

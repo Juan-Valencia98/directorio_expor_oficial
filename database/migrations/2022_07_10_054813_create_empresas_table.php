@@ -29,11 +29,11 @@ class CreateEmpresasTable extends Migration
             $table->string('ruex');
             $table->boolean('estado_ruex')->default(false);
             $table->text('imagen_empresa')->default('');
-            $table->text('logo_empresa')->default('');
+            // $table->text('logo_empresa')->default('');
             $table->text('direccion')->default('');
             $table->text('ubicacion')->default('');
             $table->text('facebook')->default('');
-            $table->text('whatssap')->default('');
+            $table->text('whatsapp')->default('');
             $table->text('tiktok')->default('');
             $table->integer('id_estado_empresa');
             $table->enum('estado', ['activo', 'inactivo', 'eliminado'])->default('inactivo');

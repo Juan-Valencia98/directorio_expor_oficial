@@ -157,7 +157,6 @@ class LoginController extends Controller
                             'ruex'                  => $data->ruex??'',
                             'estado_ruex'           => $data->estado_ruex??0,
                             'imagen_empresa'        => '',
-                            'logo_empresa'          => '',
                             'id_estado_empresa'     => $data->id_estado_empresa,
                             'estado'                => 'inactivo',
                         ]);

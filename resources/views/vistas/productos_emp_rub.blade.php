@@ -50,7 +50,7 @@
                                         <div class="services-details clearfix">
                                             <div class="p-20 p-sm-15 bg-lighter">
                                                 <h4 class="mt-0 line-height-1">
-                                                    <a href="{{ URL('detalle-producto/' . $producto->id_producto) }}">
+                                                    <a href="{{ URL('detalle-producto/' . Crypt::encryptString($producto->id_producto)) }}">
 
                                                         {{ Str::limit($producto->nombre_producto, 25, $end = ' ...') }}
 
@@ -81,7 +81,7 @@
                                                     </li>
                                                 </ul>
                                                 <a class="btn btn-dark btn-theme-coloredv btn-sm text-uppercase mt-10"
-                                                    href="{{ URL('detalle-producto/' . $producto->id_producto) }}">Ver
+                                                    href="{{ URL('detalle-producto/' . Crypt::encryptString($producto->id_producto)) }}">Ver
                                                     Producto</a>
                                             </div>
                                         </div>

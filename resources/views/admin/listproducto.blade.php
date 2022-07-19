@@ -1,7 +1,6 @@
 @extends('home')
 
 @section('content')
-
     <div class="container-fluid">
         <div class="form-head mb-4 d-flex flex-wrap align-items-center">
             <div class="me-auto">
@@ -38,8 +37,13 @@
         </div>
         <div class="row mb-4 align-items-center">
             <div class="col-xl-3 col-lg-4 mb-4 mb-lg-0">
-                <a href="javascript:void(0);" class="btn btn-secondary  btn-lg btn-block rounded text-white"
-                    data-bs-toggle="modal" data-bs-target="#addNewCustomer">+Nuevo Producto</a>
+                @if (count($productos) < 12)
+                    <a href="javascript:void(0);" class="btn btn-secondary  btn-lg btn-block rounded text-white"
+                        data-bs-toggle="modal" data-bs-target="#addNewCustomer">+Nuevo Producto</a>
+                @else
+                    <a href="javascript:void(0);" class="btn btn-secondary  btn-lg btn-block rounded text-white"
+                        data-bs-toggle="modal" data-bs-target="#">+Nuevo Producto</a>
+                @endif
                 <!-- Add Order -->
 
             </div>
@@ -63,7 +67,13 @@
                                 </svg>
                                 <div class="media-body">
                                     <p class="mb-1 fs-12 ">Total Productos</p>
-                                    <h3 class="mb-0 font-w600 fs-22">10.0 Productos</h3>
+                                    @if (count($productos) < 12)
+                                        <h3 class="mb-0 font-w600 fs-22">{{ count($productos) }} Productos</h3>
+                                    @else
+                                        <h3 class="mb-0 font-w600 fs-22">{{ count($productos) }} Productos llego a su
+                                            máximo
+                                            de productos</h3>
+                                    @endif
                                 </div>
                             </div>
                             {{-- <div>
@@ -80,7 +90,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="table-responsive rounded">
-                    <table id="example5" class="table customer-table display mb-4 fs-14 card-table">
+                    <table id="example3" class="table customer-table display mb-4 fs-14 card-table">
                         <thead>
                             <tr>
                                 <th>
@@ -120,13 +130,14 @@
                                     @elseif ($producto->estado == 'activo')
                                         <td><span class="badge badge-success">{{ $producto->estado }}</span> </td>
                                     @elseif ($producto->estado == 'observado')
-                                        <td><span class="badge badge-warning">{{ $producto->estado }}</span> </td>    
+                                        <td><span class="badge badge-warning">{{ $producto->estado }}</span> </td>
                                     @endif
                                     <td>{{ $producto->created_at }}</td>
                                     <td class="text-secondary font-w500">Bs. {{ $producto->precio_producto }}</td>
                                     <td>
                                         <div class="d-flex">
-                                            <a href="{{ URL('one-prod-admin/'.Crypt::encryptString($producto->id_producto)) }}">
+                                            <a
+                                                href="{{ URL('one-prod-admin/' . Crypt::encryptString($producto->id_producto)) }}">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -170,21 +181,68 @@
                         enctype="multipart/form-data" autocomplete="off">
                         @csrf
                         <div class="mb-3">
+                            <label class="text-black font-w500">imagen_producto</label>
+                            <div class="input-group">
+                                <div class="form-file ">
+                                    <input accept="image/png,image/jpeg,image/jpg" type="file"
+                                        class="form-file-input form-control focus:outline-none input-image-2"
+                                        name="imagen_producto" id="imagen_producto" required>
+                                </div>
+                            </div>
+                            <p class="text-image-2"> </p>
+                        </div>
+                        <div class="row">
+                        <div class="mb-3 col-md-8">
                             <label class="text-black font-w500">Nombre del
                                 Producto</label>
                             <input type="text" class="form-control focus:outline-none"
-                                placeholder="Introduzca el producto..." name="nombre_producto" id="nombre_producto"
+                                name="nombre_producto" id="nombre_producto"
                                 required>
-                            <div class="invalid-feedback">
-                                por favor, ingrese producto.
+                        </div>
+                        <div class="mb-3 col-md-4">
+                            <label class="text-black font-w500 ">Codigo Nandina</label>
+                            <input type="text" class="form-control focus:outline-none focus:ring-2 input-number"
+                                name="codigo_nandina" id="codigo_nandina">
+                        </div>
+                        </div>
+                        <div class="mb-3 read-content">
+                            <label class="text-black font-w500">Descripcion</label>
+                            <div class="mb-3 pt-3">
+                            <textarea class="form-control focus:outline-none" rows="4" name="descripcion_producto"
+                                id="descripcion_producto" required></textarea>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label class="text-black font-w500">Descripcion</label>
-                            <textarea class="form-control focus:outline-none" rows="4" name="descripcion_producto" id="descripcion_producto"
-                                required></textarea>
+                            <label class="text-black font-w500">Rubro</label>
+                            <select class="default-select form-control wide focus:outline-none" name="id_rubro"
+                                id="id_rubro" required>
+                                <option value="" selected></option>
+                                @foreach ($rubros as $rubro)
+                                    <option value="{{ $rubro->id_rubro }}">
+                                        {{ Str::limit($rubro->nombre_rubro, 60, $end = ' ...') }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-black font-w500">Categoria</label>
+                            <select class="default-select form-control wide focus:outline-none" name="id_categoria"
+                                id="id_categoria" required>
+                                <option value="" selected></option>
+                                @foreach ($categorias as $categoria)
+                                    <option value="{{ $categoria->id_categoria }}">
+                                        {{ Str::limit($categoria->descripcion_corta, 60, $end = ' ...') }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="row">
+                            <div class="mb-3 col-md-4">
+                                <label class="text-black font-w500">Medida</label>
+                                <input type="text"
+                                    class="form-control focus:outline-none focus:ring-2"
+                                    name="numero_producto" id="numero_producto" required>
+                            </div>
                             <div class="mb-3 col-md-6">
                                 <label class="text-black font-w500">Unidad de Medida</label>
                                 <select class="default-select form-control wide focus:outline-none focus:ring-2"
@@ -197,7 +255,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="mb-3 col-md-6">
+                            <div class="mb-3 col-md-2">
                                 <label class="text-black font-w500">Estrella</label>
                                 <select class="default-select form-control wide focus:outline-none focus:ring-2"
                                     name="estrella" id="estrella" required>
@@ -209,13 +267,19 @@
                                     <option value="5">5</option>
                                 </select>
                             </div>
-                            <div class="mb-3 col-md-6">
+                            <div class="mb-3 col-md-3">
                                 <label class="text-black font-w500 ">Precio</label>
                                 <input type="text"
                                     class="form-control focus:outline-none focus:ring-2 input-number-dec"
-                                    placeholder="100 - 150" name="precio_producto" id="precio_producto" required>
+                                    name="precio_producto" id="precio_producto" required>
                             </div>
-                            <div class="mb-3 col-md-6">
+                            <div class="mb-3 col-md-3">
+                                <label class="text-black font-w500 ">Precio Max.</label>
+                                <input type="text"
+                                    class="form-control focus:outline-none focus:ring-2 input-number-dec"
+                                    name="precio_producto_max" id="precio_producto_max" required>
+                            </div>
+                            <div class="mb-3 col-md-3">
                                 <label class="text-black font-w500">Moneda</label>
                                 <select class="default-select form-control wide focus:outline-none" name="id_moneda"
                                     id="id_moneda" required>
@@ -226,53 +290,14 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="mb-3 col-md-6">
-                                <label class="text-black font-w500 ">Cantidad Disponible</label>
+                            <div class="mb-3 col-md-3">
+                                <label class="text-black font-w500 ">Cant. Disp.</label>
                                 <input type="text" class="form-control focus:outline-none focus:ring-2 input-number"
                                     name="cantidad_disponible" id="cantidad_disponible" required>
                             </div>
-                            <div class="mb-3 col-md-6">
-                                <label class="text-black font-w500 ">Codigo Nandina</label>
-                                <input type="text" class="form-control focus:outline-none focus:ring-2 input-number"
-                                    name="codigo_nandina" id="codigo_nandina">
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label class="text-black font-w500">Rubro</label>
-                                <select class="default-select form-control wide focus:outline-none" name="id_rubro"
-                                    id="id_rubro" required>
-                                    <option value="" selected></option>
-                                    @foreach ($rubros as $rubro)
-                                        <option value="{{ $rubro->id_rubro }}">
-                                            {{Str::limit($rubro->nombre_rubro, 25, $end=' ...')}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label class="text-black font-w500">Categoria</label>
-                                <select class="default-select form-control wide focus:outline-none" name="id_categoria"
-                                    id="id_categoria" required>
-                                    <option value="" selected></option>
-                                    @foreach ($categorias as $categoria)
-                                        <option value="{{ $categoria->id_categoria }}">
-                                            {{Str::limit($categoria->descripcion_corta, 25, $end=' ...')}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
+                            
                         </div>
-                        <div class="mb-3">
-                            <label class="text-black font-w500">imagen_producto</label>
-                            <div class="input-group">
-                                <div class="form-file ">
-                                    <input accept="image/png,image/jpeg,image/jpg" type="file"
-                                        class="form-file-input form-control focus:outline-none input-image-2"
-                                        name="imagen_producto" id="imagen_producto" required>
-                                </div>
-                            </div>
-                            <p class="text-image-2"> </p>
-                        </div>
+                        
                         <div class="mb-3 row">
                             <div class="col-lg-8 ms-auto">
                                 <button type="submit" class="btn btn-primary">Submit</button>

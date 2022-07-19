@@ -72,8 +72,20 @@ class HomeController extends Controller
 
 
         $productos = Productos::where('id_empresa', $idDes)->get();
-        $rubros = Rubro::all();
-        $categorias = Categoria::all();
+        $rubros = DB::table('grupo_rubro')
+                    ->join('empresas', 'grupo_rubro.id_empresa', '=', 'empresas.id_empresa')
+                    ->join('rubro', 'grupo_rubro.id_rubro', '=', 'rubro.id_rubro')
+                    ->select('rubro.*')
+                    ->where('grupo_rubro.id_empresa', $idDes)->get();
+        $categorias =array();
+        foreach ($rubros as $rubro) {
+            $cats= DB::table('categoria')
+                    ->select('categoria.*')
+                    ->where('id_rubro', $rubro->id_rubro)->get();
+            foreach ($cats as $cat) {
+                array_push($categorias,$cat);
+            }
+        }
         $monedas = Monedas::all();
         $medidas = UnidadMedidas::all();
         return view('admin.listproducto', [
@@ -105,11 +117,13 @@ class HomeController extends Controller
             'imagen_producto'       => URL($direcion),
             'descripcion_producto'  => $data->descripcion_producto,
             'precio_producto'       => $data->precio_producto,
+            'precio_producto_max'   => $data->precio_producto_max ,
             'codigo_nandina'        => $data->codigo_nandina,
             'estrella'              => $data->estrella,
             'estado_producto'       => 'normal',
             'id_rubro'              => $data->id_rubro,
             'id_categoria'          => $data->id_categoria,
+            'numero_producto'       => $data->numero_producto,
             'id_unidad_medida'      => $data->id_unidad_medida,
             'id_moneda'             => $data->id_moneda,
             'estado'                => 'inactivo',
@@ -132,10 +146,29 @@ class HomeController extends Controller
             ->where('id_user', Auth::id(),)->get();
 
 
-        $productoEdit = Productos::where('id_producto', $idDes)->first();
+        // $productoEdit = Productos::where('id_producto', $idDes)->first();
+        $productoEdit = DB::table('productos')
+                        ->join('rubro', 'productos.id_rubro','=', 'rubro.id_rubro')
+                        ->join('categoria', 'productos.id_categoria','=', 'categoria.id_categoria')
+                        ->join('unidad_medidas', 'productos.id_unidad_medida','=', 'unidad_medidas.id_unidad_medida')
+                        ->join('monedas', 'productos.id_moneda','=', 'monedas.id_moneda')
+                        ->select('productos.*','rubro.nombre_rubro', 'categoria.nombre_categoria', 'unidad_medidas.nombre_unidad_medida','monedas.abrv_moneda')
+                        ->where('productos.id_producto', $idDes)->first();
 
-        $rubros = Rubro::all();
-        $categorias = Categoria::all();
+        $rubros = DB::table('grupo_rubro')
+                    ->join('empresas', 'grupo_rubro.id_empresa', '=', 'empresas.id_empresa')
+                    ->join('rubro', 'grupo_rubro.id_rubro', '=', 'rubro.id_rubro')
+                    ->select('rubro.*')
+                    ->where('grupo_rubro.id_empresa', $productoEdit->id_empresa)->get();
+        $categorias =array();
+        foreach ($rubros as $rubro) {
+            $cats= DB::table('categoria')
+                    ->select('categoria.*')
+                    ->where('id_rubro', $rubro->id_rubro)->get();
+            foreach ($cats as $cat) {
+                array_push($categorias,$cat);
+            }
+        }
         $monedas = Monedas::all();
         $medidas = UnidadMedidas::all();
         return view('admin.editproducto', [
@@ -223,11 +256,13 @@ class HomeController extends Controller
             'imagen_producto'       => $direcion,
             'descripcion_producto'  => $data->descripcion_producto,
             'precio_producto'       => $data->precio_producto,
+            'precio_producto_max'   => $data->precio_producto_max ?? '',
             'codigo_nandina'        => $data->codigo_nandina,
             'estrella'              => $data->estrella,
             'estado_producto'       => 'normal',
             'id_rubro'              => $data->id_rubro,
             'id_categoria'          => $data->id_categoria,
+            'numero_producto'       => $data->numero_producto ?? '',
             'id_unidad_medida'      => $data->id_unidad_medida,
             'id_moneda'             => $data->id_moneda,
             'id_empresa'            => $idDes,
@@ -319,8 +354,11 @@ class HomeController extends Controller
             ->where('id_user', Auth::id(),)->get();
 
 
-
-        $empresasEdit = Empresas::where('id_empresa', $idDes)->first();
+        $empresasEdit = DB::table('empresas')
+            ->join('estado_empresas', 'estado_empresas.id_estado_empresa', '=', 'empresas.id_estado_empresa')
+            ->select('empresas.*','estado_empresas.estado_empresa')
+            ->where('id_empresa', $idDes,)->first();
+        // $empresasEdit = Empresas::where('id_empresa', $idDes)->first();
 
 
         return view('admin.onempresa', [
@@ -335,15 +373,20 @@ class HomeController extends Controller
         $direcion = '';
         if ($data->hasFile('imagen_empresa')) {
             $file = $data->file('imagen_empresa');
-            $endPath = 'storage/images/empresas/' . $id . '/';
+            $endPath = 'storage/images/empresas/' . $idDes . '/';
             $fileName = time() . '-' . $file->getClientOriginalName();
             $uploadSuccess = $data->file('imagen_empresa')->move($endPath, $fileName);
             $direcion = $endPath . $fileName;
         }
-
+        if (strlen($direcion) < 5){
+            $direcion =$data->imagen_empresa??'';
+        }
+        else {
+            $direcion = URL($direcion);
+        }
         Empresas::where('id_empresa', $idDes)->update([
             'razon_social_empresa'  => $data->razon_social_empresa ?? '',
-            'descripcion_empresa'   => $data->descripcion_empresa,
+            'descripcion_empresa'   => $data->descripcion_empresa??'',
             'nit'                   => $data->nit ?? '',
             'matricula'             => $data->matricula ?? '',
             'telefono'              => $data->telefono ?? 0,
@@ -355,8 +398,12 @@ class HomeController extends Controller
             'pag_web'               => $data->pag_web ?? '',
             'ruex'                  => $data->ruex ?? '',
             'estado_ruex'           => $data->estado_ruex ?? 0,
-            'imagen_empresa'        => URL($direcion),
-            'logo_empresa'          => '',
+            'direccion'             => $data->direccion ?? '',
+            'ubicacion'             => $data->ubicacion ?? '',
+            'facebook'              => $data->facebook ?? '',
+            'whatsapp'              => $data->whatsapp ?? '',
+            'tiktok'                => $data->tiktok ?? '',
+            'imagen_empresa'        => $direcion,
             'estado'                => 'inactivo',
         ]);
         return redirect()->route('home');
@@ -438,10 +485,18 @@ class HomeController extends Controller
             $uploadSuccess = $data->file('imagen_rubro')->move($endPath, $fileName);
             $direcion = $endPath . $fileName;
         }
+
+        if (strlen($direcion) < 5){
+            $direcion =$data->imagen_rubro;
+        }
+        else {
+            $direcion = URL($direcion);
+        }
+
         Rubro::where('id_rubro', $idDes)->update([
             'nombre_rubro'  => $data->nombre_rubro,
             'abreviacion_rubro'   => $data->abreviacion_rubro,
-            'imagen_rubro'        => URL($direcion),
+            'imagen_rubro'        => $direcion,
             'estado'                => 'activo',
         ]);
         return redirect()->route('home');

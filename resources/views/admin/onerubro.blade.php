@@ -20,6 +20,8 @@
                         <form method="POST" action="{{ URL('update-rubros/' . Crypt::encryptString($rubroEdit->id_rubro)) }}"
                             enctype="multipart/form-data" autocomplete="off">
                             @csrf
+                            @method('PUT')
+                            <input type="hidden" value="{{$rubroEdit->imagen_rubro}}" id="imagen_producto" name="imagen_producto" />
                             <div class="mb-3">
                                 <label class="text-black font-w500">Abreviacion</label>
                                 <input type="text" class="form-control focus:outline-none"
@@ -41,6 +43,7 @@
                                     </div>
                                 </div>
                                 <p class="text-image-2"> </p>
+                                <img src="{{$rubroEdit->imagen_rubro}}" >
                             </div>
                             <div class="mb-3 row">
                                 <div class="col-lg-8 ms-auto">

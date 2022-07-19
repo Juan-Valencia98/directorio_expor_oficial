@@ -17,14 +17,13 @@ class CreateProductosTable extends Migration
             $table->integer('id_producto')->autoIncrement();
             $table->string('cantidad_disponible');
             $table->string('nombre_producto');
-            $table->string('contacto_producto')->default('0');
             $table->string('imagen_producto');
             $table->text('descripcion_producto');
             $table->string('precio_producto');
             $table->string('precio_producto_max')->default('');
             $table->string('codigo_nandina');
             $table->integer('estrella');
-            $table->integer('numero_producto')->default('0');
+            $table->string('numero_producto')->default('');
             $table->enum('estado_producto',['popular','normal']);
             $table->enum('estado', ['activo', 'inactivo', 'eliminado', 'observado'])->default('inactivo');
 

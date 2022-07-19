@@ -61,7 +61,7 @@
                                             <h4 class="text-theme-colored media-heading text-lowercase font-weight-500">
                                                 {{ $rubro->nombre_rubro }}
                                             </h4>
-                                            <a class="pull-right text-gray font-13 pb-5" href="{{URL('list-prod-rubros/'.$rubro->id_rubro)}}"><i
+                                            <a class="pull-right text-gray font-13 pb-5" href="{{URL('list-prod-rubros/'.Crypt::encryptString($rubro->id_rubro))}}"><i
                                                     class="fa fa-angle-double-right text-theme-colored"></i>
                                                 Ver productos</a>
                                         </div>

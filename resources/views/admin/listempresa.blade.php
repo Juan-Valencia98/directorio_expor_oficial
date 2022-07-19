@@ -14,10 +14,10 @@
                 <h2 class="font-w600 mb-0">Empresas</h2>
                 <p class="text-light"> </p>
             </div>
-            <div class="input-group search-area2 d-xl-inline-flex mb-2 me-4">
+            {{-- <div class="input-group search-area2 d-xl-inline-flex mb-2 me-4">
                 <button class="input-group-text"><i class="flaticon-381-search-2 text-primary"></i></button>
                 <input type="text" class="form-control" placeholder="Search here...">
-            </div>
+            </div> --}}
         </div>
         <div class="row">
             <div class="col-xl-12">
@@ -52,7 +52,7 @@
                 <div class="tab-content">
                     <div id="navpills-1" class="tab-pane fade show active">
                         <div class="table-responsive rounded table-hover fs-14">
-                            <table class="table mb-4 dataTablesCard card-table p-0  review-table fs-14" id="example6">
+                            <table class="table mb-4 dataTablesCard card-table p-0  review-table fs-14" id="example3">
                                 <thead>
                                     <tr>
                                         <th>
@@ -127,7 +127,7 @@
                     </div>
                     <div id="navpills-2" class="tab-pane fade active">
                         <div class="table-responsive rounded table-hover fs-14">
-                            <table class="table mb-4 dataTablesCard card-table p-0  review-table fs-14" id="example7">
+                            <table class="table mb-4 dataTablesCard card-table p-0  review-table fs-14" id="example6">
                                 <thead>
                                     <tr>
                                         <th>
@@ -195,7 +195,7 @@
                     </div>
                     <div id="navpills-3" class="tab-pane fade active">
                         <div class="table-responsive rounded table-hover fs-14">
-                            <table class="table mb-4 dataTablesCard card-table p-0  review-table fs-14" id="example7">
+                            <table class="table mb-4 dataTablesCard card-table p-0  review-table fs-14" id="example6">
                                 <thead>
                                     <tr>
                                         <th>

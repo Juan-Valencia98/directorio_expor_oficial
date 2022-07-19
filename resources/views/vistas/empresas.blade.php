@@ -65,12 +65,12 @@
                                                 {{ $empresa->razon_social_empresa }}
                                             </h4>
                                             <p>
-                                                {{ Str::limit($empresa->descripcion_empresa, 25, $end = ' ...') }}
+                                                {{ Str::limit($empresa->descripcion_empresa, 100, $end = ' ...') }}
                                             </p>
-                                            <a href="{{ URL('detalle-empresas/'.$empresa->id_empresa) }}"
+                                            <a href="{{ URL('detalle-empresas/'.Crypt::encryptString($empresa->id_empresa)) }}"
                                                  class="btn btn-flat btn-dark btn-theme-colored btn-sm">Ver Más
                                                 <i class="fa fa-angle-double-right"></i></a>
-                                            <a href="{{ URL('list-prod-empresas/'.$empresa->id_empresa) }}"
+                                            <a href="{{ URL('list-prod-empresas/'.Crypt::encryptString($empresa->id_empresa)) }}"
                                                  class="btn btn-flat btn-dark btn-theme-colored btn-sm">Productos
                                                 <i class="fa fa-angle-double-right"></i></a>
                                         </div>
