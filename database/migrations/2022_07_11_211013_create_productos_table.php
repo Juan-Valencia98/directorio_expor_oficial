@@ -20,10 +20,10 @@ class CreateProductosTable extends Migration
             $table->string('imagen_producto');
             $table->text('descripcion_producto');
             $table->string('precio_producto');
-            $table->string('precio_producto_max')->default('');
+            $table->string('precio_producto_max');
             $table->string('codigo_nandina');
             $table->integer('estrella');
-            $table->string('numero_producto')->default('');
+            $table->string('numero_producto');
             $table->enum('estado_producto',['popular','normal']);
             $table->enum('estado', ['activo', 'inactivo', 'eliminado', 'observado'])->default('inactivo');
 

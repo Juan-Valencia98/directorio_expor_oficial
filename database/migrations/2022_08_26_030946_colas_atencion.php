@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGrupoRolTable extends Migration
+class ColasAtencion extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,16 @@ class CreateGrupoRolTable extends Migration
      */
     public function up()
     {
-        Schema::create('grupo_rol', function (Blueprint $table) {
-            $table->integer('id')->autoIncrement();
+        Schema::create('colas_atencion', function (Blueprint $table) {
+            $table->integer('id_colas_atencion')->autoIncrement();
+            $table->integer('id_producto');
             $table->integer('id_user');
-            $table->integer('id_rol');
+           
+            $table->enum('estado', ['atentido', 'espera'])->default('espera');
+
             $table->timestamps();
+            $table->foreign('id_producto')->references('id_producto')->on('productos');
             $table->foreign('id_user')->references('id')->on('users');
-            $table->foreign('id_rol')->references('id_rol')->on('rol');
         });
     }
 
@@ -30,6 +33,6 @@ class CreateGrupoRolTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('grupo_rol');
+        Schema::dropIfExists('notificacion');
     }
 }

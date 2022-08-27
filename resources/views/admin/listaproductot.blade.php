@@ -104,7 +104,7 @@
                                                         <div class="media align-items-center tbl-img">
                                                             <img class="img-fluid  me-3 d-none d-xl-inline-block"
                                                                 width="250" heigth="250"
-                                                                src="{{ asset('storage/images/vistas/1657605265-Sin%20título-1.png') }}"
+                                                                src="{{ asset('storage/images/vistas/senavex1.png') }}"
                                                                 alt="DexignZone">
                                                         </div>
                                                     </td>
@@ -188,7 +188,7 @@
                                                         <div class="media align-items-center tbl-img">
                                                             <img class="img-fluid  me-3 d-none d-xl-inline-block"
                                                                 width="250" heigth="250"
-                                                                src="{{ asset('storage/images/vistas/1657605265-Sin%20título-1.png') }}"
+                                                                src="{{ asset('storage/images/vistas/senavex1.png') }}"
                                                                 alt="DexignZone">
                                                         </div>
                                                     </td>
@@ -263,7 +263,7 @@
                                                         <div class="media align-items-center tbl-img">
                                                             <img class="img-fluid  me-3 d-none d-xl-inline-block"
                                                                 width="250" heigth="250"
-                                                                src="{{ asset('storage/images/vistas/1657605265-Sin%20título-1.png') }}"
+                                                                src="{{ asset('storage/images/vistas/senavex1.png') }}"
                                                                 alt="DexignZone">
                                                         </div>
                                                     </td>
@@ -278,7 +278,6 @@
                                                         
                                                         <a href="{{ URL('publicar-prod-admin/'.Crypt::encryptString($prodInac->id_producto)) }}"
                                                             class="btn btn-secondary btn-rounded text-white btn-sm px-4">Publicar</a>
-                                                        
                                                         <a href="{{ URL('observar-prod-admin/'.Crypt::encryptString($prodInac->id_producto)) }}"
                                                             class="btn btn-warning btn-rounded text-white btn-sm ms-2  px-4">Observar</a>
                                                     </div>
@@ -340,7 +339,7 @@
                                                         <div class="media align-items-center tbl-img">
                                                             <img class="img-fluid  me-3 d-none d-xl-inline-block"
                                                                 width="250" heigth="250"
-                                                                src="{{ asset('storage/images/vistas/1657605265-Sin%20título-1.png') }}"
+                                                                src="{{ asset('storage/images/vistas/senavex1.png') }}"
                                                                 alt="DexignZone">
                                                         </div>
                                                     </td>

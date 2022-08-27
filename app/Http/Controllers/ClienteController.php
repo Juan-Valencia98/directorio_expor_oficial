@@ -41,19 +41,22 @@ class ClienteController extends Controller
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    public function listaProductos(){
+    public function listaProductos(Request $request){
+        $buscador_producto = trim($request->get('buscador_producto'));
         $productos = DB::table('productos')
         ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
         ->join('monedas', 'monedas.id_moneda', '=', 'productos.id_moneda')
         ->select('productos.*', 'monedas.*', 'empresas.*')
         ->where([
             ['productos.estado', 'activo'],
-            ['empresas.estado', 'activo']
-        ])->orderByDesc('productos.updated_at','empresas.updated_at')->get();
+            ['empresas.estado', 'activo'],
+            ['productos.nombre_producto', 'like', '%'.$buscador_producto.'%']
+        ])->orderByDesc('productos.updated_at','empresas.updated_at')->paginate(8);
 
 
         return view ('vistas.productos',[
-            'productos' => $productos
+            'productos' => $productos,
+            'buscador_producto' => $buscador_producto,
         ]);
     }
     public function oneProducto($id){
@@ -86,15 +89,18 @@ class ClienteController extends Controller
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    public function listaEmpresas(){
+    public function listaEmpresas(Request $request){
+        $buscador_empresa = trim($request->get('buscador_empresa'));
         $empresas = DB::table('empresas')
         ->where([
-            ['estado', 'activo']
-        ])->orderByDesc('updated_at')->get();
+            ['estado', 'activo'],
+            ['razon_social_empresa', 'like', '%'.$buscador_empresa.'%']
+        ])->orderByDesc('updated_at')->paginate(3);
 
 
         return view ('vistas.empresas',[
-            'empresas' => $empresas
+            'empresas' => $empresas,
+            'buscador_empresa' => $buscador_empresa 
         ]);
     }
     public function oneEmpresa($id){
@@ -112,6 +118,7 @@ class ClienteController extends Controller
                             ['productos.estado', 'activo'],
                             ['empresas.estado', 'activo'],
                             ['productos.id_empresa',$idDes]
+                            
                         ])->orderByDesc('productos.updated_at','empresas.updated_at')->get();
         return view('vistas.detalleEmpresa',[
             'detEmpresa' => $detEmpresa,
@@ -128,7 +135,7 @@ class ClienteController extends Controller
             ['productos.estado', 'activo'],
             ['empresas.estado', 'activo'],
             ['empresas.id_empresa',$idDes]
-        ])->orderByDesc('productos.updated_at','empresas.updated_at')->get();
+        ])->orderByDesc('productos.updated_at','empresas.updated_at')->paginate(8);
 
 
         return view ('vistas.productos_emp_rub',[
@@ -138,7 +145,8 @@ class ClienteController extends Controller
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////    
 
-    public function listaRubros(){
+    public function listaRubros(Request $request){
+        $buscador_rubro = trim($request->get('buscador_rubro'));
         $empresas = DB::table('empresas')
         ->where([
             ['estado', 'activo']
@@ -146,8 +154,9 @@ class ClienteController extends Controller
 
         $rubros = DB::table('rubro')
         ->where([
-            ['estado', 'activo']
-        ])->orderByDesc('updated_at')->paginate(3, ['*'], 'page', null);
+            ['estado', 'activo'],
+            ['nombre_rubro', 'like', '%'.$buscador_rubro.'%']
+        ])->orderByDesc('updated_at')->paginate(6, ['*'], 'page', null);
         // $rubros = DB::table('productos')
         //                 ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
         //                 ->join('rubro', 'rubros.id_rubro', '=', 'productos.id_rubro')
@@ -160,7 +169,8 @@ class ClienteController extends Controller
 
         return view ('vistas.listarubro',[
             'empresas' => $empresas,
-            'rubros' => $rubros
+            'rubros' => $rubros,
+            'buscador_rubro'    => $buscador_rubro
         ]);
     }
     public function oneRubro($id){

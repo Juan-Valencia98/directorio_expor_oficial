@@ -23,7 +23,6 @@
     <title>Senavex : Directorio Exportador</title>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Stylesheet -->
     <link href="{{ asset('vista/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
@@ -32,7 +31,7 @@
     <link href="{{ asset('vista/css/css-plugin-collections.css') }}" rel="stylesheet" />
     <!-- CSS | menuzord megamenu skins -->
     <link href="{{ asset('vista/css/menuzord-megamenu.css') }}" rel="stylesheet" />
-    <link id="menuzord-menu-skins" href="{{ asset('css/menuzord-skins/menuzord-boxed.css') }}" rel="stylesheet" />
+    {{-- <link id="menuzord-menu-skins" href="{{ asset('css/menuzord-skins/menuzord-boxed.css') }}" rel="stylesheet" /> --}}
     <!-- CSS | Main style file -->
     <link href="{{ asset('vista/css/style-main.css') }}" rel="stylesheet" type="text/css">
     <!-- CSS | Preloader Styles -->
@@ -146,7 +145,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="widget dark">
-                        <img class="mt-10" alt="" src="logob.png">
+                        <img class="mt-10" alt="" src="{{asset('storage/images/vistas/logob.png')}}">
                         <p class="text-white">Servicio Nacional de Verificacion de Exportaciones</p>
 
                     </div>
@@ -197,7 +196,7 @@
             <div class="container pt-10 pb-10">
                 <div class="row text-center">
                     <div class="col-md-12 sm-text-center">
-                        <p class="font-13 text-black-777 m-0">Copyright &copy;2017 ThemeMascot. All Rights Reserved</p>
+                        <p class="font-13 text-black-777 m-0">Derechos de autor &copy;2022. Directorio exportador</p>
                     </div>
 
                 </div>

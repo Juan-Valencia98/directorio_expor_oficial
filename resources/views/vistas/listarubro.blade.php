@@ -23,10 +23,10 @@
                         <div class="col-md-4">
                             <div class="widget">
                                 <div class="search-form">
-                                    <form method="get" class="search-form" action="javaScript:void(0)">
+                                    <form method="get" class="search-form" action="{{ URL('rubros/')}}">
                                         <div class="input-group">
                                             <input type="text" placeholder="Haga clic para buscar"
-                                                id="buscador_convocatorias" name="buscador_convocatorias"
+                                                id="buscador_rubro" name="buscador_rubro" value="{{ $buscador_rubro }}"
                                                 class="form-control search-input" />
                                             <span class="input-group-btn">
                                                 <button type="submit" class="btn search-button">
@@ -42,6 +42,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-9 blog-pull-left">
+                        @if (count($rubros) > 0)
                         @foreach ($rubros as $rubro)
                             <div class="upcoming-events bg-white-f3 mb-20">
                                 <div class="row">
@@ -69,6 +70,23 @@
                                 </div>
                             </div>
                         @endforeach
+                        @else
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <h1> Lo siento no se  </h1>
+                            <h1>  encontraron productos </h1>
+                            
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                        @endif
                         {{-- <div class="upcoming-events bg-white-f3 mb-20">
                             <div class="row">
                                 <div class="col-sm-4 pr-0 pr-sm-15">
@@ -90,31 +108,7 @@
                                 </div>
                             </div>
                         </div> --}}
-                        {{$rubros->links()}}
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <nav>
-                                    <ul class="pagination theme-colored pull-right xs-pull-center mb-xs-40">
-                                        <li>
-                                            <a href="#" aria-label="Previous">
-                                                <span aria-hidden="true">«</span>
-                                            </a>
-                                        </li>
-                                        <li class="active"><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">...</a></li>
-                                        <li>
-                                            <a href="#" aria-label="Next">
-                                                <span aria-hidden="true">»</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
+                        <div class="pagination theme-colored pull-right xs-pull-center mb-xs-40"> {!!$rubros->links()!!}</div>
                     </div>
                     <div class="col-md-3">
                         <div class="sidebar sidebar-left mt-sm-30">

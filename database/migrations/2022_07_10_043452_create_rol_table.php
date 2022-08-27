@@ -18,7 +18,7 @@ class CreateRolTable extends Migration
             $table->string('nombre_rol');
             $table->enum('estado', ['activo', 'inactivo', 'eliminado'])->default('activo');
             $table->timestamps();
-            $table->primary('id_rol');
+            $table->primary('id_rol'); 
         });
     }
 

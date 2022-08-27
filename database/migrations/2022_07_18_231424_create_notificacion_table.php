@@ -17,17 +17,18 @@ class CreateNotificacionTable extends Migration
             $table->integer('id_notificacion')->autoIncrement();
             $table->string('correo_de');
             $table->string('correo_para');
-            $table->string('imagen_notificacion');
             $table->string('titulo');
             $table->text('mensaje');
+            $table->text('imagen');
+
             $table->enum('estado', ['visto', 'no visto', 'eliminado'])->default('no visto');
 
             $table->integer('id_producto');
-            $table->integer('id_empresa');
+            $table->integer('id_user');
  
             $table->timestamps();
             $table->foreign('id_producto')->references('id_producto')->on('productos');
-            $table->foreign('id_empresa')->references('id_empresa')->on('empresas');
+            $table->foreign('id_user')->references('id')->on('users');
         });
     }
 

@@ -44,9 +44,9 @@ class HomeController extends Controller
             ->select('empresas.*')
             ->where('id_user', Auth::id(),)->get();
 
-        $rol = DB::table('grupo_rol')
-            ->join('users', 'grupo_rol.id_user', '=', 'users.id')
-            ->join('rol', 'grupo_rol.id_rol', '=', 'rol.id_rol')
+        $rol = DB::table('grupo_empresa_user')
+            ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
+            ->join('rol', 'grupo_empresa_user.id_rol', '=', 'rol.id_rol')
             ->select('rol.id_rol','rol.nombre_rol')
             ->where('id_user', Auth::id(),)->get();
         return view('admin.inicio', [
@@ -63,9 +63,9 @@ class HomeController extends Controller
             ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
             ->select('empresas.*')
             ->where('id_user', Auth::id(),)->get();
-        $rol = DB::table('grupo_rol')
-            ->join('users', 'grupo_rol.id_user', '=', 'users.id')
-            ->join('rol', 'grupo_rol.id_rol', '=', 'rol.id_rol')
+        $rol = DB::table('grupo_empresa_user')
+            ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
+            ->join('rol', 'grupo_empresa_user.id_rol', '=', 'rol.id_rol')
             ->select('rol.id_rol','rol.nombre_rol')
             ->where('id_user', Auth::id(),)->get();
 
@@ -112,12 +112,12 @@ class HomeController extends Controller
             $direcion = $endPath . $fileName;
         }
         Productos::create([
-            'cantidad_disponible'   => $data->cantidad_disponible ?? '',
+            'cantidad_disponible'   => $data->cantidad_disponible,
             'nombre_producto'       => $data->nombre_producto,
             'imagen_producto'       => URL($direcion),
             'descripcion_producto'  => $data->descripcion_producto,
             'precio_producto'       => $data->precio_producto,
-            'precio_producto_max'   => $data->precio_producto_max ,
+            'precio_producto_max'   => $data->precio_producto_max ?? '',
             'codigo_nandina'        => $data->codigo_nandina,
             'estrella'              => $data->estrella,
             'estado_producto'       => 'normal',
@@ -139,9 +139,9 @@ class HomeController extends Controller
             ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
             ->select('empresas.*')
             ->where('id_user', Auth::id(),)->get();
-        $rol = DB::table('grupo_rol')
-            ->join('users', 'grupo_rol.id_user', '=', 'users.id')
-            ->join('rol', 'grupo_rol.id_rol', '=', 'rol.id_rol')
+        $rol = DB::table('grupo_empresa_user')
+            ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
+            ->join('rol', 'grupo_empresa_user.id_rol', '=', 'rol.id_rol')
             ->select('rol.id_rol','rol.nombre_rol')
             ->where('id_user', Auth::id(),)->get();
 
@@ -189,9 +189,24 @@ class HomeController extends Controller
     }
     public function observadoProd($id)
     {
+        $rol = DB::table('grupo_empresa_user')
+            ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
+            ->join('rol', 'grupo_empresa_user.id_rol', '=', 'rol.id_rol')
+            ->select('rol.id_rol','rol.nombre_rol')
+            ->where('id_user', Auth::id(),)->get();
         $idDes =Crypt::decryptString($id);
-        Productos::where('id_producto', $idDes)->update(['estado' => 'observado']);
-        return redirect()->route('home');
+        $productos = DB::table('productos')
+            ->join('empresas', 'empresas.id_empresa', '=', 'productos.id_empresa')
+            ->join('monedas', 'monedas.id_moneda', '=', 'productos.id_moneda')
+            ->select('productos.*', 'empresas.*')
+            ->where([
+                ['productos.id_producto', $idDes]
+            ])->orderByDesc('productos.updated_at','empresas.updated_at')->first();
+        return view('admin.correo', [
+            'roles' => $rol,
+            'idDes' => $idDes,
+            'productos' => $productos
+        ]);
     }
     public function publicarProd($id)
     {
@@ -206,9 +221,9 @@ class HomeController extends Controller
             ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
             ->select('empresas.*')
             ->where('id_user', Auth::id(),)->get();
-        $rol = DB::table('grupo_rol')
-            ->join('users', 'grupo_rol.id_user', '=', 'users.id')
-            ->join('rol', 'grupo_rol.id_rol', '=', 'rol.id_rol')
+        $rol = DB::table('grupo_empresa_user')
+            ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
+            ->join('rol', 'grupo_empresa_user.id_rol', '=', 'rol.id_rol')
             ->select('rol.id_rol','rol.nombre_rol')
             ->where('id_user', Auth::id(),)->get();
 
@@ -280,9 +295,9 @@ class HomeController extends Controller
             ->select('empresas.*')
             ->where('id_user', Auth::id(),)->get();
 
-        $rol = DB::table('grupo_rol')
-            ->join('users', 'grupo_rol.id_user', '=', 'users.id')
-            ->join('rol', 'grupo_rol.id_rol', '=', 'rol.id_rol')
+        $rol = DB::table('grupo_empresa_user')
+            ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
+            ->join('rol', 'grupo_empresa_user.id_rol', '=', 'rol.id_rol')
             ->select('rol.id_rol','rol.nombre_rol')
             ->where('id_user', Auth::id(),)->get();
 
@@ -322,9 +337,9 @@ class HomeController extends Controller
             ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
             ->select('empresas.*')
             ->where('id_user', Auth::id(),)->get();
-        $rol = DB::table('grupo_rol')
-            ->join('users', 'grupo_rol.id_user', '=', 'users.id')
-            ->join('rol', 'grupo_rol.id_rol', '=', 'rol.id_rol')
+        $rol = DB::table('grupo_empresa_user')
+            ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
+            ->join('rol', 'grupo_empresa_user.id_rol', '=', 'rol.id_rol')
             ->select('rol.id_rol','rol.nombre_rol')
             ->where('id_user', Auth::id(),)->get();
 
@@ -347,9 +362,9 @@ class HomeController extends Controller
             ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
             ->select('empresas.*')
             ->where('id_user', Auth::id(),)->get();
-        $rol = DB::table('grupo_rol')
-            ->join('users', 'grupo_rol.id_user', '=', 'users.id')
-            ->join('rol', 'grupo_rol.id_rol', '=', 'rol.id_rol')
+        $rol = DB::table('grupo_empresa_user')
+            ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
+            ->join('rol', 'grupo_empresa_user.id_rol', '=', 'rol.id_rol')
             ->select('rol.id_rol','rol.nombre_rol')
             ->where('id_user', Auth::id(),)->get();
 
@@ -391,9 +406,9 @@ class HomeController extends Controller
             'matricula'             => $data->matricula ?? '',
             'telefono'              => $data->telefono ?? 0,
             'celular_1'             => $data->celular_1 ?? 0,
-            'nombre_1'              => $data->nombre_1,
-            'celular_2'             => $data->celular_2,
-            'nombre_2'              => $data->nombre_2,
+            'nombre_1'              => $data->nombre_1?? '',
+            'celular_2'             => $data->celular_2?? 0,
+            'nombre_2'              => $data->nombre_2?? '',
             'email'                 => $data->email ?? '',
             'pag_web'               => $data->pag_web ?? '',
             'ruex'                  => $data->ruex ?? '',
@@ -433,9 +448,9 @@ class HomeController extends Controller
             ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
             ->select('empresas.*')
             ->where('id_user', Auth::id(),)->get();
-        $rol = DB::table('grupo_rol')
-            ->join('users', 'grupo_rol.id_user', '=', 'users.id')
-            ->join('rol', 'grupo_rol.id_rol', '=', 'rol.id_rol')
+        $rol = DB::table('grupo_empresa_user')
+            ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
+            ->join('rol', 'grupo_empresa_user.id_rol', '=', 'rol.id_rol')
             ->select('rol.id_rol','rol.nombre_rol')
             ->where('id_user', Auth::id(),)->get();
 
@@ -457,9 +472,9 @@ class HomeController extends Controller
             ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
             ->select('empresas.*')
             ->where('id_user', Auth::id(),)->get();
-        $rol = DB::table('grupo_rol')
-            ->join('users', 'grupo_rol.id_user', '=', 'users.id')
-            ->join('rol', 'grupo_rol.id_rol', '=', 'rol.id_rol')
+        $rol = DB::table('grupo_empresa_user')
+            ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
+            ->join('rol', 'grupo_empresa_user.id_rol', '=', 'rol.id_rol')
             ->select('rol.id_rol','rol.nombre_rol')
             ->where('id_user', Auth::id(),)->get();
 
@@ -530,9 +545,9 @@ class HomeController extends Controller
             ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
             ->select('empresas.*')
             ->where('id_user', Auth::id(),)->get();
-        $rol = DB::table('grupo_rol')
-            ->join('users', 'grupo_rol.id_user', '=', 'users.id')
-            ->join('rol', 'grupo_rol.id_rol', '=', 'rol.id_rol')
+        $rol = DB::table('grupo_empresa_user')
+            ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
+            ->join('rol', 'grupo_empresa_user.id_rol', '=', 'rol.id_rol')
             ->select('rol.id_rol','rol.nombre_rol')
             ->where('id_user', Auth::id(),)->get();
 
@@ -552,9 +567,9 @@ class HomeController extends Controller
             ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
             ->select('empresas.*')
             ->where('id_user', Auth::id(),)->get();
-        $rol = DB::table('grupo_rol')
-            ->join('users', 'grupo_rol.id_user', '=', 'users.id')
-            ->join('rol', 'grupo_rol.id_rol', '=', 'rol.id_rol')
+        $rol = DB::table('grupo_empresa_user')
+            ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
+            ->join('rol', 'grupo_empresa_user.id_rol', '=', 'rol.id_rol')
             ->select('rol.id_rol','rol.nombre_rol')
             ->where('id_user', Auth::id(),)->get();
 
@@ -596,4 +611,51 @@ class HomeController extends Controller
         }
         return redirect()->route('home');
     }
+
+
+
+
+
+
+    ///Listar correos enviados
+    public function listCorreo()
+    {
+        
+        $rol = DB::table('grupo_empresa_user')
+            ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
+            ->join('rol', 'grupo_empresa_user.id_rol', '=', 'rol.id_rol')
+            ->select('rol.id_rol','rol.nombre_rol')
+            ->where('id_user', Auth::id(),)->get();
+
+       
+        $empresas = DB::table('notificacion')
+            ->select('*')
+            ->where('id_user', Auth::id(),)->get();
+
+        return view('admin.listarcorreo', [
+            'empresas' => $empresas,
+            'roles' => $rol,
+        ]);
+    }
+    ////Listar correos enviados
+    public function oneCorreo($id)
+    {
+        
+        $rol = DB::table('grupo_empresa_user')
+            ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
+            ->join('rol', 'grupo_empresa_user.id_rol', '=', 'rol.id_rol')
+            ->select('rol.id_rol','rol.nombre_rol')
+            ->where('id_user', Auth::id(),)->get();
+
+       
+        $empresas = DB::table('notificacion')
+            ->select('*')
+            ->where('id_user', Auth::id(),)->get();
+
+        return view('admin.onecorreo', [
+            'empresas' => $empresas,
+            'roles' => $rol,
+        ]);
+    }
+    
 }

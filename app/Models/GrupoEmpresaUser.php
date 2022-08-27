@@ -14,6 +14,7 @@ class GrupoEmpresaUser extends Model
 
     protected $fillable = [
         'id_empresa',
+        'id_rol',
         'id_user',
     ];
 }   

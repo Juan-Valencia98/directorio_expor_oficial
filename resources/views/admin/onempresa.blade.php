@@ -84,24 +84,24 @@
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label class="text-black font-w500 ">Persona Encargado</label>
-                                    <input type="text" class="form-control focus:outline-none focus:ring-2" 
-                                        name="nombre_1" id="nombre_1"  value="{{$empresasEdit->nombre_1}}" required>
+                                    <input type="text" class="form-control" 
+                                        name="nombre_1" id="nombre_1"  value="{{$empresasEdit->nombre_1}}" >
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label class="text-black font-w500 ">Persona Encargado</label>
-                                    <input type="text" class="form-control focus:outline-none focus:ring-2"
-                                        name="nombre_2" id="nombre_2"  value="{{$empresasEdit->nombre_2}}" required>
+                                    <input type="text" class="form-control"
+                                        name="nombre_2" id="nombre_2"  value="{{$empresasEdit->nombre_2}}" >
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label class="text-black font-w500 ">Celular 1</label>
-                                    <input type="text" class="form-control focus:outline-none focus:ring-2"
-                                        name="celular_1" id="celular_1"  value="{{$empresasEdit->celular_1}}" required>
+                                    <input type="text" class="form-control "
+                                        name="celular_1" id="celular_1"  value="{{$empresasEdit->celular_1}}" >
                                 </div>
                                
                                 <div class="mb-3 col-md-6">
                                     <label class="text-black font-w500 ">Celular 2</label>
-                                    <input type="text" class="form-control focus:outline-none focus:ring-2"
-                                        name="celular_2" id="celular_2"  value="{{$empresasEdit->celular_2}}" required>
+                                    <input type="text" class="form-control "
+                                        name="celular_2" id="celular_2"  value="{{$empresasEdit->celular_2}}" >
                                 </div>
                                 
                                 
@@ -122,18 +122,18 @@
                                 
                                 <div class="mb-3 col-md-4">
                                     <label class="text-black font-w500 ">Facebook</label>
-                                    <input type="text" class="form-control focus:outline-none focus:ring-2" name="facebook"
-                                        id="facebook" value="{{$empresasEdit->facebook}}" required>
+                                    <input type="text" class="form-control " name="facebook"
+                                        id="facebook" value="{{$empresasEdit->facebook}}" >
                                 </div>
                                 <div class="mb-3 col-md-4">
                                     <label class="text-black font-w500 ">WhatsApp</label>
-                                    <input type="text" class="form-control focus:outline-none focus:ring-2" name="whatsapp"
-                                        id="whatsapp" value="{{$empresasEdit->whatsapp}}" required>
+                                    <input type="text" class="form-control " name="whatsapp"
+                                        id="whatsapp" value="{{$empresasEdit->whatsapp}}" >
                                 </div>
                                 <div class="mb-3 col-md-4">
                                     <label class="text-black font-w500 ">Tiktok</label>
-                                    <input type="text" class="form-control focus:outline-none focus:ring-2" name="tiktok"
-                                        id="tiktok" value="{{$empresasEdit->tiktok}}" required>
+                                    <input type="text" class="form-control " name="tiktok"
+                                        id="tiktok" value="{{$empresasEdit->tiktok}}" >
                                 </div>
                             </div>
                             

@@ -32,10 +32,10 @@
                         <ul class="list angle-double-right">
                             <li><strong>Teléfono:</strong> {{ $detEmpresa->telefono }}</li>
                             <li><strong>Correo electrónico:</strong> {{ $detEmpresa->email }}</li>
-                            <li><strong>Encargado:</strong> {{ $detEmpresa->nombre_1 }}</li>
-                            <li><strong>Celular:</strong> {{ $detEmpresa->celular_1 }}</li>
+                            <li><strong>Encargados:</strong> {{ $detEmpresa->nombre_1 }}  / {{ $detEmpresa->nombre_2 }}</li>
+                            <li><strong>Celulares:</strong> {{ $detEmpresa->celular_1 }} / {{ $detEmpresa->celular_2 }}</li>
                             <li>
-                                <strong>Dirección:</strong> #405, Lan Streen, Los Vegas, USA
+                                <strong>Dirección:</strong>  {{ $detEmpresa->direccion }}
                             </li>
                         </ul>
                     </div>
@@ -43,17 +43,14 @@
                 <div class="mt-30 mb-0">
                     <ul class="styled-icons icon-circled m-0 pull-right">
                         <li>
-                            <a href="#" data-bg-color="#3A5795" style="background: rgb(58, 87, 149) !important"><i
+                            <a href="{{ $detEmpresa->facebook }}" target="_blank" data-bg-color="#3A5795" style="background: rgb(58, 87, 149) !important"><i
                                     class="fa fa-facebook text-white"></i></a>
                         </li>
                         <li>
-                            <a href="#" data-bg-color="#55ACEE" style="background: rgb(85, 172, 238) !important"><i
-                                    class="fa fa-twitter text-white"></i></a>
+                            <a href="{{ $detEmpresa->whatsapp }}" target="_blank" data-bg-color="#25D366" style="background: rgb(85, 238, 108) !important"><i
+                                    class="fa fa-whatsapp text-white"></i></a>
                         </li>
-                        <li>
-                            <a href="#" data-bg-color="#A11312" style="background: rgb(161, 19, 18) !important"><i
-                                    class="fa fa-google-plus text-white"></i></a>
-                        </li>
+                        
                     </ul>
                 </div>
                 <div class="col-md-12 mt-30">
@@ -116,9 +113,7 @@
                                         </h5>
                                         <p>
                                             <font style="vertical-align: inherit">
-                                                <font style="vertical-align: inherit">Oficina de , Av. Sucre S/N-Zona Villa
-                                                    Esperanza-El
-                                                    Alto)</font>
+                                                <font style="vertical-align: inherit">O{{ $detEmpresa->direccion }}</font>
                                             </font>
                                         </p>
                                     </div>
@@ -136,7 +131,8 @@
                                         </h5>
                                         <p>
                                             <font style="vertical-align: inherit">
-                                                <font style="vertical-align: inherit">+591 73538678</font>
+                                                <font style="vertical-align: inherit">{{ $detEmpresa->celular_1 }}</font> /
+                                                <font style="vertical-align: inherit">{{ $detEmpresa->celular_2 }}</font>
                                             </font>
                                         </p>
                                     </div>
@@ -166,9 +162,7 @@
 
                     <div class="col-md-7">
                         <!-- Google Map HTML Codes -->
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.678553338401!2d-68.1958931845919!3d-16.49180644488855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x915ede3378ea9d6d%3A0x26cac4a2caefcb29!2sUniversidad%20P%C3%BAblica%20de%20El%20Alto!5e0!3m2!1ses!2sbo!4v1633619377467!5m2!1ses!2sbo"
-                            width="100%" height="450" style="border: 0" allowfullscreen="" loading="lazy"></iframe>
+                            {!!$detEmpresa->ubicacion!!}
                     </div>
                 </div>
             </div>

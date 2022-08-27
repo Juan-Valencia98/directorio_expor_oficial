@@ -24,10 +24,10 @@
                         <div class="col-md-4">
                             <div class="widget">
                                 <div class="search-form">
-                                    <form method="get" class="search-form" action="javaScript:void(0)">
+                                    <form method="get" class="search-form" action="{{ URL('empresas/')}}">
                                         <div class="input-group">
                                             <input type="text" placeholder="Haga clic para buscar"
-                                                id="buscador_convocatorias" name="buscador_convocatorias"
+                                                id="buscador_empresa" name="buscador_empresa" value="{{$buscador_empresa}}"
                                                 class="form-control search-input" />
                                             <span class="input-group-btn">
                                                 <button type="submit" class="btn search-button">
@@ -44,6 +44,7 @@
                 <div class="row">
 
                     <div class="col-md-9 blog-pull-right">
+                        @if (count($empresas) > 0)
                         @foreach ($empresas as $empresa)
                             <div class="upcoming-events bg-white-f3 mb-20">
                                 <div class="row">
@@ -79,7 +80,7 @@
                                         <div class="event-count p-15 mt-15">
                                             <ul>
                                                 <li class="mb-10 text-theme-colored">
-                                                    <i class="fa fa-clock-o mr-5"></i> at 8:30 am - 6:00
+                                                    <i class="fa fa-clock-o mr-5"></i> de 8:30 am - 6:00
                                                     pm
                                                 </li>
                                                 <li class="text-theme-colored">
@@ -90,44 +91,37 @@
                                             <ul
                                                 class="styled-icons icon-sm icon-bordered icon-rounded clearfix mt-20 mb-10">
                                                 <li>
-                                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                                    <a href="{{ $empresa->facebook }}"><i class="fa fa-facebook"></i></a>
                                                 </li>
                                                 <li>
-                                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                                    <a href="{{ $empresa->whatsapp }}"><i class="fa fa-whatsapp"></i></a>
                                                 </li>
-                                                <li>
-                                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                                </li>
+                                                
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <nav>
-                                    <ul class="pagination theme-colored pull-right xs-pull-center mb-xs-40">
-                                        <li>
-                                            <a href="#" aria-label="Previous">
-                                                <span aria-hidden="true">«</span>
-                                            </a>
-                                        </li>
-                                        <li class="active"><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">...</a></li>
-                                        <li>
-                                            <a href="#" aria-label="Next">
-                                                <span aria-hidden="true">»</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
+                        @else
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <h1> Lo siento no se  </h1>
+                            <h1>  encontraron productos </h1>
+                            
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                        @endif
+                        <div class="pagination"> {{ $empresas->links(); }}</div>
+                            
                     </div>
                     <div class="col-md-3">
                         <div class="sidebar sidebar-left mt-sm-30">
@@ -169,7 +163,7 @@
                                 </div>
                             </div>
 
-                            <div class="widget">
+                            {{-- <div class="widget">
                                 <h5 class="widget-title line-bottom">
                                     <font style="vertical-align: inherit">
                                         <font style="vertical-align: inherit">Publicados
@@ -230,7 +224,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

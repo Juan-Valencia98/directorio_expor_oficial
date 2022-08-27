@@ -268,17 +268,18 @@
                                 </select>
                             </div>
                             <div class="mb-3 col-md-3">
-                                <label class="text-black font-w500 ">Precio</label>
-                                <input type="text"
-                                    class="form-control focus:outline-none focus:ring-2 input-number-dec"
-                                    name="precio_producto" id="precio_producto" required>
-                            </div>
-                            <div class="mb-3 col-md-3">
-                                <label class="text-black font-w500 ">Precio Max.</label>
-                                <input type="text"
-                                    class="form-control focus:outline-none focus:ring-2 input-number-dec"
+                                <label class="text-black font-w500">Precio Max.</label>
+                                <input type="number"
+                                    class="form-control"
                                     name="precio_producto_max" id="precio_producto_max" required>
                             </div>
+                            <div class="mb-3 col-md-3">
+                                <label class="text-black font-w500">Precio</label>
+                                <input type="number"
+                                    class="form-control focus:outline-none focus:ring-2"
+                                    name="precio_producto" id="precio_producto" required>
+                            </div>
+                            
                             <div class="mb-3 col-md-3">
                                 <label class="text-black font-w500">Moneda</label>
                                 <select class="default-select form-control wide focus:outline-none" name="id_moneda"
@@ -300,7 +301,7 @@
                         
                         <div class="mb-3 row">
                             <div class="col-lg-8 ms-auto">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Enviar</button>
                             </div>
                         </div>
                         {{-- <div class="form-group">

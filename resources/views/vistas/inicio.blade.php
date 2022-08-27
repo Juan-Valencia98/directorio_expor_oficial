@@ -291,7 +291,6 @@
                         <p class="font-15">Suspendisse dui enim, vehicula ac tempus sed, ullamcorper pretium
                             mauris. Ut vel pellentesque felis, sit amet laoreet sem. Nunc lacinia mauris a felis
                             tincidunt ullamcorper.</p>
-                        <div><img src="images/signature.png" alt="" class="mt-15 mb-10"></div>
                         <a class="btn btn-colored btn-circled btn-xl btn-theme-colored2 mt-10 mb-sm-30"
                             href="page-about1.html">Leer mas</a>
                         <a class="btn btn-default btn-circled btn-xl mt-10 mb-sm-30"

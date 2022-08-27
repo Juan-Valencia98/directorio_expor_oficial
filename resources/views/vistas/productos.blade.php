@@ -11,18 +11,18 @@
                     <div class="row">
                         <div class="col-md-8">
                             <h2 class="mt-0 line-height-1">
-                                Productos <span class="text-theme-colored3">Productos</span>
+                                Listado de  <span class="text-theme-colored3">Productos</span>
                             </h2>
                         </div>
 
                         <div class="col-md-4">
                             <div class="widget">
                                 <div class="search-form">
-                                    <form method="get" class="search-form" action="javaScript:void(0)">
+                                    <form method="get" class="search-form" action="{{ URL('productos/')}}">
                                         <div class="input-group">
                                             <input type="text" placeholder="Haga clic para buscar"
-                                                id="buscador_convocatorias" name="buscador_convocatorias"
-                                                class="form-control search-input" />
+                                                id="buscador_producto" name="buscador_producto"
+                                                class="form-control search-input" value="{{$buscador_producto}}" />
                                             <span class="input-group-btn">
                                                 <button type="submit" class="btn search-button">
                                                     <i class="fa fa-search"></i>
@@ -38,6 +38,7 @@
 
                 <div class="row multi-row-clearfix">
                     <div id="blog-posts-wrapper" class="blog-posts">
+                        @if (count($productos) > 0)
                         @foreach ($productos as $producto)
                             <div class="col-sm-3 col-md-3 col-lg-3">
                                 <div class="services mb-sm-50 mt-20">
@@ -83,6 +84,24 @@
                                 </div>
                             </div>
                         @endforeach
+                        @else
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <h1> Lo siento no se  </h1>
+                            <h1>  encontraron productos </h1>
+                            
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                        @endif
+                        <div class="pagination"> {{ $productos->links(); }}</div>
                         {{-- <div class="col-sm-3 col-md-3 col-lg-3">
                         <div class="services mb-sm-50 mt-20">
                             <div class="thumb">
@@ -151,23 +170,7 @@
                     </div> --}}
                     </div>
                 </div>
-                <nav class="mt-20">
-                    <ul class="pagination">
-                        <li class="disabled">
-                            <a aria-label="Previous" href="#"><span aria-hidden="true">«</span></a>
-                        </li>
-                        <li class="active">
-                            <a href="#">1 <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li>
-                            <a aria-label="Next" href="#"><span aria-hidden="true">»</span></a>
-                        </li>
-                    </ul>
-                </nav>
+                
             </div>
         </section>
     </div>

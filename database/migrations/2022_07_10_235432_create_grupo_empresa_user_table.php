@@ -16,9 +16,11 @@ class CreateGrupoEmpresaUserTable extends Migration
         Schema::create('grupo_empresa_user', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->integer('id_empresa');
+            $table->integer('id_rol');
             $table->integer('id_user');
             $table->timestamps();
             $table->foreign('id_empresa')->references('id_empresa')->on('empresas');
+            $table->foreign('id_rol')->references('id_rol')->on('rol');
             $table->foreign('id_user')->references('id')->on('users');
         });
     }

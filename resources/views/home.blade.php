@@ -260,7 +260,37 @@
                         </a>
                     </li>
                     @foreach ($roles as $rol)
-                        @if ($rol->id_rol == '2')
+                        @if ($rol->nombre_rol == 'Certificador')
+                            <li>
+                                <h5 class="nav-text"> {{ $rol->nombre_rol }}</h5>
+                            </li>
+                            <li><a href="{{ URL('list-emp-admin') }}" class="ai-icon" aria-expanded="false">
+                                    <i class="flaticon-013-checkmark"></i>
+                                    <span class="nav-text">Empresas</span>
+                                </a>
+                            </li>
+                            <li><a href="{{ URL('list-prod-admin') }}" class="ai-icon" aria-expanded="false">
+                                    <i class="flaticon-013-checkmark"></i>
+                                    <span class="nav-text">Productos</span>
+                                </a>
+                            </li>
+                            <li><a href="{{ URL('list-rubros-admin') }}" class="ai-icon" aria-expanded="false">
+                                    <i class="flaticon-013-checkmark"></i>
+                                    <span class="nav-text">Rubros</span>
+                                </a>
+                            </li>
+                            <li><a href="{{ URL('list-categorias-admin') }}" class="ai-icon" aria-expanded="false">
+                                    <i class="flaticon-013-checkmark"></i>
+                                    <span class="nav-text">Categorias</span>
+                                </a>
+                            </li>
+                            <li><a href="{{ URL('list-correo-admin') }}" class="ai-icon" aria-expanded="false">
+                                    <i class="flaticon-013-checkmark"></i>
+                                    <span class="nav-text">Correos</span>
+                                </a>
+                            </li>
+                        @else
+                            
                             <li>
                                 <h5 class="nav-text"> {{ $rol->nombre_rol }}</h5>
                             </li>
@@ -344,7 +374,7 @@
                                 <ul aria-expanded="false">
                                     @foreach ($empresas as $empresa)
                                         @if ($empresa->estado == 'inactivo')
-                                            <li><a href="#">
+                                            <li><a href="{{ URL('list-prod-admin/' . Crypt::encryptString($empresa->id_empresa)) }}">
                                                     {{ $empresa->razon_social_empresa }}
                                                     <span class="badge badge-warning">Pendiente</span>
                                                 </a>
@@ -366,32 +396,9 @@
                                     @endforeach
                                 </ul>
                             </li>
-                        @else
-                            <li>
-                                <h5 class="nav-text"> {{ $rol->nombre_rol }}</h5>
-                            </li>
-                            <li><a href="{{ URL('list-emp-admin') }}" class="ai-icon" aria-expanded="false">
-                                    <i class="flaticon-013-checkmark"></i>
-                                    <span class="nav-text">Empresas</span>
-                                </a>
-                            </li>
-                            <li><a href="{{ URL('list-prod-admin') }}" class="ai-icon" aria-expanded="false">
-                                    <i class="flaticon-013-checkmark"></i>
-                                    <span class="nav-text">Productos</span>
-                                </a>
-                            </li>
-                            <li><a href="{{ URL('list-rubros-admin') }}" class="ai-icon" aria-expanded="false">
-                                    <i class="flaticon-013-checkmark"></i>
-                                    <span class="nav-text">Rubros</span>
-                                </a>
-                            </li>
-                            <li><a href="{{ URL('list-categorias-admin') }}" class="ai-icon"
-                                    aria-expanded="false">
-                                    <i class="flaticon-013-checkmark"></i>
-                                    <span class="nav-text">Categorias</span>
-                                </a>
-                            </li>
+                            @break
                         @endif
+                        
                     @endforeach
 
 

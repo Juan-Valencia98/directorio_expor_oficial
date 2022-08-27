@@ -60,19 +60,13 @@ class LoginController extends Controller
             ]);
             if ($response->status() == 200) {
 
-                $dataEmp = Http::get('api.taypi.senavex.gob.bo/api/pruebas/upea/v1/signin/' . $response->object()->token);
+                $dataEmp = Http::get('http://api.taypi.senavex.gob.bo/api/pruebas/upea/v1/signin/' . $response->object()->token);
                 foreach ($dataEmp->object() as $data) {
-                    $GrupRolId = GrupoRol::where([['id_user', Auth::id()],['id_rol',$data->id_rol]])->first();
-                    if (!$GrupRolId) {
-                        GrupoRol::create([
-                            'id_user'=>Auth::id(),
-                            'id_rol' => $data->id_rol
-                        ]);
-                    }
-                    $GrupEmpUserId = GrupoEmpresaUser::where([['id_user', Auth::id()],['id_empresa',$data->id_empresa]])->first();
+                    $GrupEmpUserId = GrupoEmpresaUser::where([['id_user', Auth::id()],['id_empresa',$data->id_empresa],['id_rol',$data->id_rol]])->first();
                     if(!$GrupEmpUserId) {
                         GrupoEmpresaUser::create([
                             'id_user' =>Auth::id(),
+                            'id_rol' => $data->id_rol,
                             'id_empresa'=>$data->id_empresa
                         ]);
                     }
@@ -122,7 +116,7 @@ class LoginController extends Controller
                     'password' => Hash::make($request->password),
                 ]);
 
-                $dataEmp = Http::get('api.taypi.senavex.gob.bo/api/pruebas/upea/v1/signin/' . $response->object()->token);
+                $dataEmp = Http::get('http://api.taypi.senavex.gob.bo/api/pruebas/upea/v1/signin/' . $response->object()->token);
 
                 foreach ($dataEmp->object() as $data) {
                     $RolId = Rol::where('id_rol', $data->id_rol)->first();

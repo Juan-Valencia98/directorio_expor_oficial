@@ -59,6 +59,9 @@ Route::put('update-empr/{id}', [App\Http\Controllers\HomeController::class, 'upd
 Route::get('eliminar-emp-admin/{id}', [App\Http\Controllers\HomeController::class, 'eliminarEmp'])->name('eliminar-emp-admin');
 Route::get('publicar-emp-admin/{id}', [App\Http\Controllers\HomeController::class, 'publicarEmp'])->name('publicar-emp-admin');
 
+Route::get('list-correo-admin', [App\Http\Controllers\HomeController::class, 'listCorreo'])->name('list-correo-admin');
+Route::get('one-correo-admin/{id}', [App\Http\Controllers\HomeController::class, 'oneCorreo'])->name('one-correo-admin');
+Route::post('enviar-correo', [App\Http\Controllers\HomeController::class, 'enviarCorreo'])->name('enviar-correo');
 
 
 
@@ -72,3 +75,8 @@ Route::get('list-prod-rubros/{id}', [App\Http\Controllers\ClienteController::cla
 Route::get('productos', [App\Http\Controllers\ClienteController::class, 'listaProductos'])->name('productos');
 Route::get('detalle-producto/{id}', [App\Http\Controllers\ClienteController::class, 'oneProducto'])->name('detalle-producto');
 Route::get('detalle-empresas/{id}', [App\Http\Controllers\ClienteController::class, 'oneEmpresa'])->name('detalle-empresas');
+
+
+
+Route::get('correo-lista', [App\Http\Controllers\HomeController::class, 'listaCorreo'])->name('correo-lista');
+Route::post('send-email/{id}',[App\Http\Controllers\MailController::class, 'sendEmail'])->name('send-email');

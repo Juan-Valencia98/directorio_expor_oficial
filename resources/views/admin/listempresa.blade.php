@@ -98,7 +98,7 @@
                                         <td class="d-none d-lg-table-cell">
                                             <div class="media align-items-center tbl-img">
                                                 <img class="img-fluid  me-3 d-none d-xl-inline-block" width="250"
-                                                    heigth="250" src="{{ asset('storage/images/vistas/1657605265-Sin%20título-1.png')}}" alt="DexignZone">
+                                                    heigth="250" src="{{ asset('storage/images/vistas/senavex1.png')}}" alt="DexignZone">
                                             </div>
                                         </td>
                                         @endif
@@ -173,7 +173,7 @@
                                         <td class="d-none d-lg-table-cell">
                                             <div class="media align-items-center tbl-img">
                                                 <img class="img-fluid  me-3 d-none d-xl-inline-block" width="250"
-                                                    heigth="250" src="{{ asset('storage/images/vistas/1657605265-Sin%20título-1.png')}}" alt="DexignZone">
+                                                    heigth="250" src="{{ asset('storage/images/vistas/senavex1.png')}}" alt="DexignZone">
                                             </div>
                                         </td>
                                         @endif
@@ -241,7 +241,7 @@
                                         <td class="d-none d-lg-table-cell">
                                             <div class="media align-items-center tbl-img">
                                                 <img class="img-fluid  me-3 d-none d-xl-inline-block" width="250"
-                                                    heigth="250" src="{{ asset('storage/images/vistas/1657605265-Sin%20título-1.png')}}" alt="DexignZone">
+                                                    heigth="250" src="{{ asset('storage/images/vistas/senavex1.png')}}" alt="DexignZone">
                                             </div>
                                         </td>
                                         @endif

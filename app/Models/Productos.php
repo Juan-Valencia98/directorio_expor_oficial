@@ -12,10 +12,12 @@ class Productos extends Model
 
     protected $fillable = [
         'cantidad_disponible',
+        'numero_producto',
         'nombre_producto',
         'imagen_producto',
         'descripcion_producto',
         'precio_producto',
+        'precio_producto_max',
         'codigo_nandina',
         'estrella',
         'estado_producto',

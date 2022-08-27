@@ -162,8 +162,8 @@ var THEMEMASCOT = {};
             THEMEMASCOT.initialize.TM_datePicker();
             THEMEMASCOT.initialize.TM_ddslick();
             THEMEMASCOT.initialize.TM_sliderRange();
-            THEMEMASCOT.initialize.TM_loadBSParentModal();
-            THEMEMASCOT.initialize.TM_demoSwitcher();
+            // THEMEMASCOT.initialize.TM_loadBSParentModal();
+            // THEMEMASCOT.initialize.TM_demoSwitcher();
             THEMEMASCOT.initialize.TM_platformDetect();
             THEMEMASCOT.initialize.TM_onLoadPopupPromoBox();
             THEMEMASCOT.initialize.TM_customDataAttributes();
@@ -299,31 +299,31 @@ var THEMEMASCOT = {};
         /* ---------------------------------------------------------------------- */
         /* ------------------------ Bootstrap Parent Modal  --------------------- */
         /* ---------------------------------------------------------------------- */
-        TM_loadBSParentModal: function() {
-            var ajaxLoadContent = true;
-            if( ajaxLoadContent ) {
-                $.ajax({
-                    url: "ajax-load/bootstrap-parent-modal.html",
-                    success: function (data) { $body.append(data); },
-                    dataType: 'html'
-                });
-            }
-        },
+        // TM_loadBSParentModal: function() {
+        //     var ajaxLoadContent = true;
+        //     if( ajaxLoadContent ) {
+        //         $.ajax({
+        //             url: "ajax-load/bootstrap-parent-modal.html",
+        //             success: function (data) { $body.append(data); },
+        //             dataType: 'html'
+        //         });
+        //     }
+        // },
 
         /* ---------------------------------------------------------------------- */
         /* ------------------------------ Demo Switcher  ------------------------ */
         /* ---------------------------------------------------------------------- */
-        TM_demoSwitcher: function() {
-            var showSwitcher = true;
-            var $style_switcher = $('#style-switcher');
-            if( !$style_switcher.length && showSwitcher ) {
-                $.ajax({
-                    url: "color-switcher/style-switcher.html",
-                    success: function (data) { $body.append(data); },
-                    dataType: 'html'
-                });
-            }
-        },
+        // TM_demoSwitcher: function() {
+        //     var showSwitcher = true;
+        //     var $style_switcher = $('#style-switcher');
+        //     if( !$style_switcher.length && showSwitcher ) {
+        //         $.ajax({
+        //             url: "color-switcher/style-switcher.html",
+        //             success: function (data) { $body.append(data); },
+        //             dataType: 'html'
+        //         });
+        //     }
+        // },
 
         /* ---------------------------------------------------------------------- */
         /* ------------------------------ Preloader  ---------------------------- */
