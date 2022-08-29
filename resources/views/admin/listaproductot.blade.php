@@ -59,14 +59,7 @@
                             <table class="table mb-4 dataTablesCard card-table p-0  review-table fs-14" id="example3">
                                 <thead>
                                     <tr>
-                                        <th>
-                                            <div class="form-check checkbox-secondary">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="checkAll">
-                                                <label class="form-check-label" for="checkAll">
-                                                </label>
-                                            </div>
-                                        </th>
+                                        
                                         <th>Titulo</th>
                                         <th style="width:250px;" class="d-none d-lg-table-cell">Imagen</th>
                                         <th>Descripcion</th>
@@ -77,14 +70,7 @@
                                     @foreach ($prodTodos as $prodTod)
                                         @if ($prodTod->estado != 'eliminado')
                                             <tr>
-                                                <td>
-                                                    <div class="form-check checkbox-secondary">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="flexCheckDefault11">
-                                                        <label class="form-check-label" for="flexCheckDefault11">
-                                                        </label>
-                                                    </div>
-                                                </td>
+                                                
                                                 <td>
                                                     <div class="media-body">
                                                         <h4 class="font-w600 mb-1 ">{{ $prodTod->nombre_producto }}</h4>
@@ -143,14 +129,7 @@
                             <table class="table mb-4 dataTablesCard card-table p-0  review-table fs-14" id="example3">
                                 <thead>
                                     <tr>
-                                        <th>
-                                            <div class="form-check checkbox-secondary">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="checkAll2">
-                                                <label class="form-check-label" for="checkAll2">
-                                                </label>
-                                            </div>
-                                        </th>
+                                       
                                         <th style="width:250px;">Titulo</th>
                                         <th class="d-none d-lg-table-cell">Imagen</th>
                                         <th>Descripcion</th>
@@ -161,14 +140,7 @@
                                     @foreach ($prodActivos as $prodAct)
                                         @if ($prodAct->estado != 'eliminado')
                                             <tr>
-                                                <td>
-                                                    <div class="form-check checkbox-secondary">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="flexCheckDefault11">
-                                                        <label class="form-check-label" for="flexCheckDefault11">
-                                                        </label>
-                                                    </div>
-                                                </td>
+                                                
                                                 <td>
                                                     <div class="media-body">
                                                         <h4 class="font-w600 mb-1 ">{{ $prodAct->nombre_producto }}</h4>
@@ -218,14 +190,7 @@
                             <table class="table mb-4 dataTablesCard card-table p-0  review-table fs-14" id="example3">
                                 <thead>
                                     <tr>
-                                        <th>
-                                            <div class="form-check checkbox-secondary">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="checkAll3">
-                                                <label class="form-check-label" for="checkAll3">
-                                                </label>
-                                            </div>
-                                        </th>
+                                        
                                         <th style="width:250px;">Titulo</th>
                                         <th class="d-none d-lg-table-cell">Imagen</th>
                                         <th>Descripcion</th>
@@ -236,14 +201,7 @@
                                     @foreach ($prodInactivos as $prodInac)
                                         @if ($prodInac->estado != 'eliminado')
                                             <tr>
-                                                <td>
-                                                    <div class="form-check checkbox-secondary">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="flexCheckDefault11">
-                                                        <label class="form-check-label" for="flexCheckDefault11">
-                                                        </label>
-                                                    </div>
-                                                </td>
+                                                
                                                 <td>
                                                     <div class="media-body">
                                                         <h4 class="font-w600 mb-1 ">{{ $prodInac->nombre_producto }}</h4>
@@ -294,14 +252,7 @@
                             <table class="table mb-4 dataTablesCard card-table p-0  review-table fs-14" id="example3">
                                 <thead>
                                     <tr>
-                                        <th>
-                                            <div class="form-check checkbox-secondary">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="checkAll4">
-                                                <label class="form-check-label" for="checkAll4">
-                                                </label>
-                                            </div>
-                                        </th>
+                                        
                                         <th style="width:250px;">Titulo</th>
                                         <th class="d-none d-lg-table-cell">Imagen</th>
                                         <th>Descripcion</th>
@@ -312,14 +263,7 @@
                                     @foreach ($prodObservados as $prodObs)
                                         @if ($prodObs->estado != 'eliminado')
                                             <tr>
-                                                <td>
-                                                    <div class="form-check checkbox-secondary">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="flexCheckDefault11">
-                                                        <label class="form-check-label" for="flexCheckDefault11">
-                                                        </label>
-                                                    </div>
-                                                </td>
+                                                
                                                 <td>
                                                     <div class="media-body">
                                                         <h4 class="font-w600 mb-1 ">{{ $prodObs->nombre_producto }}</h4>

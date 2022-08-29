@@ -76,7 +76,7 @@
                             <br>
                             <br>
                             <h1> Lo siento no se  </h1>
-                            <h1>  encontraron productos </h1>
+                            <h1>  encontraron Rubros </h1>
                             
                             <br>
                             <br>

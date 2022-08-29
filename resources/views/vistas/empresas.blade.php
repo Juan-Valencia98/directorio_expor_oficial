@@ -109,7 +109,7 @@
                             <br>
                             <br>
                             <h1> Lo siento no se  </h1>
-                            <h1>  encontraron productos </h1>
+                            <h1>  encontraron empresas </h1>
                             
                             <br>
                             <br>
@@ -147,16 +147,13 @@
                                     <div class="categories">
                                         <ul class="list-border">
                                             <li>
-                                                <a href="{{ URL('productos') }}">Productos<span>(19)</span></a>
+                                                <a href="{{ URL('productos') }}">Productos<span></span></a>
                                             </li>
                                             <li>
-                                                <a href="{{ URL('rubros') }}">Rubros<span>(21)</span></a>
+                                                <a href="{{ URL('rubros') }}">Rubros<span></span></a>
                                             </li>
                                             <li>
-                                                <a href="{{ URL('categorias') }}">Categorias<span>(15)</span></a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ URL('empresas') }}">Empresas<span>(35)</span></a>
+                                                <a href="{{ URL('empresas') }}">Empresas<span></span></a>
                                             </li>
                                         </ul>
                                     </div>

@@ -230,7 +230,7 @@
                                             <line x1="21" y1="12" x2="9" y2="12">
                                             </line>
                                         </svg>
-                                        <span class="ms-2">{{ __('Logout') }} </span>
+                                        <span class="ms-2">{{ __('Cerrar Sesión') }} </span>
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                         class="d-none">
@@ -331,7 +331,7 @@
                                 </ul>
                             </li> --}}
                             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                    <i class="flaticon-041-graph"></i>
+                                    <i class="flaticon-042-menu"></i>
                                     <span class="nav-text">Empresas</span>
                                 </a>
                                 <ul aria-expanded="false">
@@ -368,7 +368,7 @@
                             </li>
                             {{-- href="{{ URL ('list-prod-admin') }}" --}}
                             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                    <i class="flaticon-045-heart"></i>
+                                    <i class="flaticon-086-star"></i>
                                     <span class="nav-text">Productos</span>
                                 </a>
                                 <ul aria-expanded="false">
@@ -499,16 +499,16 @@
         $('.input-image').change(function() {
             $('.text-image').text('');
             $('.img-src').attr('src', '');
-            if (validateExtension(this)) {
+            if (validateExtensionEmpresa(this)) {
                 console.log('extension ok')
-                if (validateWeight(this) && validateDimension(this)) {
+                if (validateWeight(this) && validateDimensionEmpresa(this)) {
                     console.log('tamaño ok')
                     viewImage1(this);
                 }
             }
         });
 
-        function validateExtension(data) {
+        function validateExtensionEmpresa(data) {
             var rute = data.value;
             var extension = rute.substring(rute.lastIndexOf('.') + 1).toLowerCase();
             var extensionValida = validExtensions.indexOf(extension);
@@ -521,7 +521,7 @@
             }
         }
 
-        function validateWeight(data) {
+        function validateWeightEmpresa(data) {
             if (data.files && data.files[0]) {
                 var fileWeight = data.files[0].size / 1024;
                 if (fileWeight > allowedWeight) {
@@ -535,7 +535,7 @@
             }
         }
 
-        function validateDimension(data) {
+        function validateDimensionEmpresa(data) {
             var bandera = false
             var reader = new FileReader();
             //Read the contents of Image File.
@@ -550,13 +550,13 @@
                     var height = this.height;
                     var width = this.width;
                     console.log(height, width);
-                    if (height == 300 && width == 300) {
+                    if (height == 650 && width == 550) {
                         //show width and height to user
                         bandera = true;
                         console.log(bandera)
                         return bandera;
                     } else {
-                        $('.text-image').text("La altura y el ancho deben ser 300x300 px.");
+                        $('.text-image-2').text("La altura y el ancho deben ser 650x550 px.");
                         bandera = false;
                         console.log(bandera)
                         return bandera;
@@ -648,6 +648,7 @@
                 }
             }
         }
+        
 
 
         function viewImage(data) {

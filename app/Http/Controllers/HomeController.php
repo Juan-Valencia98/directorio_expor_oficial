@@ -71,7 +71,9 @@ class HomeController extends Controller
 
 
 
-        $productos = Productos::where('id_empresa', $idDes)->get();
+        $productos = Productos::where('id_empresa', $idDes)
+                    ->orderBy('updated_at', 'desc')
+                    ->get();
         $rubros = DB::table('grupo_rubro')
                     ->join('empresas', 'grupo_rubro.id_empresa', '=', 'empresas.id_empresa')
                     ->join('rubro', 'grupo_rubro.id_rubro', '=', 'rubro.id_rubro')
@@ -230,10 +232,25 @@ class HomeController extends Controller
 
 
 
-        $productosInactivos = Productos::all()->where('estado', 'inactivo');
-        $productosActivos = Productos::all()->where('estado', 'activo');
-        $productosObservados = Productos::all()->where('estado', 'observado');
-        $productosTodos = Productos::all();
+        $productosInactivos =  DB::table('productos')
+                                ->select('productos.*')
+                                ->where('estado', 'inactivo')
+                                ->orderBy('updated_at', 'desc')
+                                ->get();
+        $productosActivos = DB::table('productos')
+                                ->select('productos.*')
+                                ->where('estado', 'activo')
+                                ->orderBy('updated_at', 'desc')
+                                ->get();
+        $productosObservados = DB::table('productos')
+                                ->select('productos.*')
+                                ->where('estado', 'observado')
+                                ->orderBy('updated_at', 'desc')
+                                ->get();
+        $productosTodos = DB::table('productos')
+                            ->select('productos.*')
+                            ->orderBy('updated_at', 'desc')
+                            ->get();
         return view('admin.listaproductot', [
             'empresas' => $empresas,
             'roles' => $rol,
@@ -306,6 +323,7 @@ class HomeController extends Controller
             ->join('empresas', 'grupo_rubro.id_empresa', '=', 'empresas.id_empresa')
             ->join('rubro', 'grupo_rubro.id_rubro', '=', 'rubro.id_rubro')
             ->select('grupo_rubro.id','empresas.id_empresa','empresas.razon_social_empresa','rubro.id_rubro','rubro.nombre_rubro','grupo_rubro.created_at')
+            ->orderByDesc('empresas.updated_at','rubro.updated_at')
             ->where('grupo_rubro.id_empresa',$idDes)->get();
         $rubros = Rubro::all();
         return view('admin.gruporubro', [
@@ -336,6 +354,7 @@ class HomeController extends Controller
             ->join('empresas', 'grupo_empresa_user.id_empresa', '=', 'empresas.id_empresa')
             ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
             ->select('empresas.*')
+            ->orderByDesc('empresas.updated_at')
             ->where('id_user', Auth::id(),)->get();
         $rol = DB::table('grupo_empresa_user')
             ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
@@ -447,7 +466,8 @@ class HomeController extends Controller
             ->join('empresas', 'grupo_empresa_user.id_empresa', '=', 'empresas.id_empresa')
             ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
             ->select('empresas.*')
-            ->where('id_user', Auth::id(),)->get();
+            ->where('id_user', Auth::id(),)
+            ->get();
         $rol = DB::table('grupo_empresa_user')
             ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
             ->join('rol', 'grupo_empresa_user.id_rol', '=', 'rol.id_rol')
@@ -628,19 +648,21 @@ class HomeController extends Controller
             ->where('id_user', Auth::id(),)->get();
 
        
-        $empresas = DB::table('notificacion')
+        $notificaciones = DB::table('notificacion')
             ->select('*')
-            ->where('id_user', Auth::id(),)->get();
+            ->where('id_user', Auth::id(),)
+            ->orderByDesc('updated_at')
+            ->get();
 
         return view('admin.listarcorreo', [
-            'empresas' => $empresas,
+            'notificaciones' => $notificaciones,
             'roles' => $rol,
         ]);
     }
     ////Listar correos enviados
     public function oneCorreo($id)
     {
-        
+        $idDes =Crypt::decryptString($id);
         $rol = DB::table('grupo_empresa_user')
             ->join('users', 'grupo_empresa_user.id_user', '=', 'users.id')
             ->join('rol', 'grupo_empresa_user.id_rol', '=', 'rol.id_rol')
@@ -648,12 +670,12 @@ class HomeController extends Controller
             ->where('id_user', Auth::id(),)->get();
 
        
-        $empresas = DB::table('notificacion')
+        $notificacion = DB::table('notificacion')
             ->select('*')
-            ->where('id_user', Auth::id(),)->get();
+            ->where('id_notificacion', $idDes,)->first();
 
         return view('admin.onecorreo', [
-            'empresas' => $empresas,
+            'notificacion' => $notificacion,
             'roles' => $rol,
         ]);
     }

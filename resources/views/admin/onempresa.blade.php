@@ -27,11 +27,11 @@
                                 <div class="input-group">
                                     <div class="form-file ">
                                         <input accept="image/png,image/jpeg,image/jpg" type="file"
-                                            class="form-file-input form-control focus:outline-none "
+                                            class="form-file-input form-control focus:outline-none input-image"
                                             name="imagen_empresa" id="imagen_empresa" >
                                     </div>
                                     @if(strlen($empresasEdit->imagen_empresa) > 0)
-                                    <img src="{{$empresasEdit->imagen_empresa}}" alt="Imagen">
+                                    <img src="{{$empresasEdit->imagen_empresa}}" height="250" width="200" alt="Imagen">
                                 @endif
                                 </div>
                                 <p class="text-image-2"> </p>
@@ -40,31 +40,31 @@
                             <div class="mb-3">
                                 <label class="text-black font-w500">Nombre de la
                                     Empresa</label>
-                                <input type="text" class="form-control form-control-lg focus:outline-none"
+                                <input type="text" class="form-control form-control-lg focus:outline-none"  style="font-weight:bolder; background-color:rgb(225, 225, 225);"
                                     name="razon_social_empresa" id="razon_social_empresa" value="{{$empresasEdit->razon_social_empresa}}"
                                     readonly>
                             </div>
                             <div class="mb-3 read-content">
                                 <label class="text-black font-w500">Descripción</label>
                                 <div class="mb-3 pt-3">
-                                <textarea class="form-control bg-transparent" cols="30" rows="5" name="descripcion_empresa" 
+                                <textarea class="form-control bg-transparent" maxlength="50" cols="30" rows="5" name="descripcion_empresa" 
                                     id="descripcion_empresa" >{{$empresasEdit->descripcion_empresa}}</textarea>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="mb-3 col-md-3">
                                     <label class="text-black font-w500 ">Nit</label>
-                                    <input type="text" class="form-control focus:outline-none focus:ring-2 input-number"
+                                    <input type="text" class="form-control focus:outline-none focus:ring-2 input-number" style="font-weight:bolder; background-color:rgb(225, 225, 225);"
                                         name="nit" id="nit"  value="{{$empresasEdit->nit}}" readonly>
                                 </div>
                                 <div class="mb-3 col-md-3">
                                     <label class="text-black font-w500 ">Matricula</label>
-                                    <input type="text" class="form-control focus:outline-none focus:ring-2 input-number"
+                                    <input type="text" class="form-control focus:outline-none focus:ring-2 input-number" style="font-weight:bolder; background-color:rgb(225, 225, 225);"
                                         name="matricula" id="matricula"  value="{{$empresasEdit->matricula}}" readonly>
                                 </div>
                                 <div class="mb-3 col-md-3">
                                     <label class="text-black font-w500 ">Ruex</label>
-                                    <input type="text" class="form-control focus:outline-none focus:ring-2 input-number" name="ruex"
+                                    <input type="text" class="form-control focus:outline-none focus:ring-2 input-number" name="ruex" style="font-weight:bolder; background-color:rgb(225, 225, 225);"
                                         id="ruex" value="{{$empresasEdit->ruex}}" readonly>
                                 </div>
                                 <div class="mb-3 col-md-3">

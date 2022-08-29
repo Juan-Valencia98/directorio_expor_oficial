@@ -93,13 +93,6 @@
                     <table id="example3" class="table customer-table display mb-4 fs-14 card-table">
                         <thead>
                             <tr>
-                                <th>
-                                    <div class="form-check checkbox-secondary">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkAll">
-                                        <label class="form-check-label" for="checkAll">
-                                        </label>
-                                    </div>
-                                </th>
                                 <th>Imagen</th>
                                 <th>Nombre Producto</th>
                                 <th>Descripcion</th>
@@ -112,14 +105,7 @@
                         <tbody>
                             @foreach ($productos as $producto)
                                 <tr>
-                                    <td>
-                                        <div class="form-check checkbox-secondary">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckDefault1">
-                                            <label class="form-check-label" for="flexCheckDefault1">
-                                            </label>
-                                        </div>
-                                    </td>
+                                    
                                     <td><img class="rounded-rectangle" width="150" heigth="150"
                                             src="{{ $producto->imagen_producto }}" alt=""></td>
                                     <td>{{ $producto->nombre_producto }}</td>
@@ -201,14 +187,14 @@
                         </div>
                         <div class="mb-3 col-md-4">
                             <label class="text-black font-w500 ">Codigo Nandina</label>
-                            <input type="text" class="form-control focus:outline-none focus:ring-2 input-number"
+                            <input type="text" maxlength="10" class="form-control focus:outline-none focus:ring-2 input-number"
                                 name="codigo_nandina" id="codigo_nandina">
                         </div>
                         </div>
                         <div class="mb-3 read-content">
                             <label class="text-black font-w500">Descripcion</label>
                             <div class="mb-3 pt-3">
-                            <textarea class="form-control focus:outline-none" rows="4" name="descripcion_producto"
+                            <textarea class="form-control focus:outline-none" maxlength="100" rows="4" name="descripcion_producto"
                                 id="descripcion_producto" required></textarea>
                             </div>
                         </div>

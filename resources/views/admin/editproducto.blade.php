@@ -58,7 +58,7 @@
                                 </div>
                                 <div class="mb-3 col-md-4">
                                     <label class="text-black font-w500 ">Codigo Nandina</label>
-                                    <input type="text" class="form-control focus:outline-none focus:ring-2 input-number"
+                                    <input type="number" maxlength="10" class="form-control focus:outline-none focus:ring-2 input-number"
                                         name="codigo_nandina" id="codigo_nandina"
                                         value="{{ $productoEdit->codigo_nandina }}" readonly>
                                 </div>
@@ -66,7 +66,7 @@
                             <div class="mb-3  read-content">
                                 <label class="text-black font-w500">Descripcion</label>
                                 <div class="mb-3 pt-3">
-                                    <textarea class="form-control focus:outline-none" rows="4" name="descripcion_producto" id="descripcion_producto"
+                                    <textarea class="form-control focus:outline-none" maxlength="100" rows="4" name="descripcion_producto" id="descripcion_producto"
                                         required>{{ $productoEdit->descripcion_producto }}</textarea>
                                 </div>
                             </div>
