@@ -19,12 +19,12 @@
                             <a href="javascript:void(0);" class="btn btn-secondary  btn-lg btn-block rounded text-white"
                                 data-bs-toggle="modal" data-bs-target="#addNewCustomer">+Nuevo Producto</a>
                             <!-- Add Order -->
-            
+
                         </div>
                     </div>
-                    
+
                     <div class="card-body">
-                        
+
                         <div class="table-responsive">
                             <table id="example3" class="display" style="min-width: 845px">
                                 <thead>

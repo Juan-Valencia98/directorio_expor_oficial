@@ -35,7 +35,7 @@
                                 @endif
                                 </div>
                                 <p class="text-image-2"> </p>
-                                
+
                             </div>
                             <div class="mb-3">
                                 <label class="text-black font-w500">Nombre de la
@@ -47,7 +47,7 @@
                             <div class="mb-3 read-content">
                                 <label class="text-black font-w500">Descripción</label>
                                 <div class="mb-3 pt-3">
-                                <textarea class="form-control bg-transparent" maxlength="50" cols="30" rows="5" name="descripcion_empresa" 
+                                <textarea class="form-control bg-transparent" maxlength="50" cols="30" rows="5" name="descripcion_empresa"
                                     id="descripcion_empresa" >{{$empresasEdit->descripcion_empresa}}</textarea>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="mb-3 col-md-3">
                                     <label class="text-black font-w500 ">Teléfono</label>
-                                    <input type="text" class="form-control focus:outline-none focus:ring-2" 
+                                    <input type="text" class="form-control focus:outline-none focus:ring-2"
                                         name="telefono" id="telefono"  value="{{$empresasEdit->telefono}}" required>
                                 </div>
                                 <div class="mb-3 col-md-6">
@@ -79,12 +79,12 @@
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label class="text-black font-w500 ">Correo Electronico</label>
-                                    <input type="text" class="form-control focus:outline-none focus:ring-2" 
+                                    <input type="text" class="form-control focus:outline-none focus:ring-2"
                                         name="email" id="email"  value="{{$empresasEdit->email}}" required>
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label class="text-black font-w500 ">Persona Encargado</label>
-                                    <input type="text" class="form-control" 
+                                    <input type="text" class="form-control"
                                         name="nombre_1" id="nombre_1"  value="{{$empresasEdit->nombre_1}}" >
                                 </div>
                                 <div class="mb-3 col-md-6">
@@ -97,29 +97,29 @@
                                     <input type="text" class="form-control "
                                         name="celular_1" id="celular_1"  value="{{$empresasEdit->celular_1}}" >
                                 </div>
-                               
+
                                 <div class="mb-3 col-md-6">
                                     <label class="text-black font-w500 ">Celular 2</label>
                                     <input type="text" class="form-control "
                                         name="celular_2" id="celular_2"  value="{{$empresasEdit->celular_2}}" >
                                 </div>
-                                
-                                
+
+
                                 <div class="mb-3 col-md-6">
                                     <label class="text-black font-w500 ">Dirección</label>
                                     <div class="post-input">
-                                    <textarea class="form-control bg-transparent" cols="30" rows="5" name="direccion" 
+                                    <textarea class="form-control bg-transparent" cols="30" rows="5" name="direccion"
                                         id="direccion" >{{$empresasEdit->direccion}}</textarea>
                                     </div>
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label class="text-black font-w500 ">Ubicación</label>
                                     <div class="post-input">
-                                    <textarea class="form-control bg-transparent" cols="30" rows="5" name="ubicacion" 
+                                    <textarea class="form-control bg-transparent" cols="30" rows="5" name="ubicacion"
                                         id="ubicacion" >{{$empresasEdit->ubicacion}}</textarea>
                                     </div>
                                 </div>
-                                
+
                                 <div class="mb-3 col-md-4">
                                     <label class="text-black font-w500 ">Facebook</label>
                                     <input type="text" class="form-control " name="facebook"
@@ -136,7 +136,7 @@
                                         id="tiktok" value="{{$empresasEdit->tiktok}}" >
                                 </div>
                             </div>
-                            
+
                             <div class="mb-3 row">
                                 <div class="col-lg-8 ms-auto">
                                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -145,9 +145,9 @@
                             {{-- <div class="form-group">
                                 <button type="button" class="btn btn-primary center">Create</button>
                             </div> --}}
-    
+
                         </form>
-    
+
                     </div>
                 </div>
             </div>

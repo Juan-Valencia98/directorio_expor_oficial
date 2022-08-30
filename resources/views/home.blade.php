@@ -290,7 +290,7 @@
                                 </a>
                             </li>
                         @else
-                            
+
                             <li>
                                 <h5 class="nav-text"> {{ $rol->nombre_rol }}</h5>
                             </li>
@@ -398,7 +398,7 @@
                             </li>
                             @break
                         @endif
-                        
+
                     @endforeach
 
 
@@ -634,13 +634,13 @@
                     var height = this.height;
                     var width = this.width;
                     console.log(height, width);
-                    if (height == 300 && width == 300) {
+                    if ((height == 300 && width == 300) || (height == 400 && width == 300)) {
                         //show width and height to user
                         bandera = true;
                         console.log(bandera)
                         return bandera;
                     } else {
-                        $('.text-image-2').text("La altura y el ancho deben ser 300x300 px.");
+                        $('.text-image-2').text("La altura y el ancho deben ser 300x300 px o 300x400 px");
                         bandera = false;
                         console.log(bandera)
                         return bandera;
@@ -648,7 +648,7 @@
                 }
             }
         }
-        
+
 
 
         function viewImage(data) {

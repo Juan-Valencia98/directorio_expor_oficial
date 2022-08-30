@@ -105,7 +105,7 @@
                         <tbody>
                             @foreach ($productos as $producto)
                                 <tr>
-                                    
+
                                     <td><img class="rounded-rectangle" width="150" heigth="150"
                                             src="{{ $producto->imagen_producto }}" alt=""></td>
                                     <td>{{ $producto->nombre_producto }}</td>
@@ -265,7 +265,7 @@
                                     class="form-control focus:outline-none focus:ring-2"
                                     name="precio_producto" id="precio_producto" required>
                             </div>
-                            
+
                             <div class="mb-3 col-md-3">
                                 <label class="text-black font-w500">Moneda</label>
                                 <select class="default-select form-control wide focus:outline-none" name="id_moneda"
@@ -282,9 +282,9 @@
                                 <input type="text" class="form-control focus:outline-none focus:ring-2 input-number"
                                     name="cantidad_disponible" id="cantidad_disponible" required>
                             </div>
-                            
+
                         </div>
-                        
+
                         <div class="mb-3 row">
                             <div class="col-lg-8 ms-auto">
                                 <button type="submit" class="btn btn-primary">Enviar</button>
