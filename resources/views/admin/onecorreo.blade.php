@@ -63,7 +63,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-4">
-                                                    <img src="{{ asset('storage/images/producto/2/1661473964-pil.png') }}" height="75%" width="75%" alt="" />
+                                                    <img src="{{$notificacion->imagen}}" height="75%" width="75%" alt="" />
                                             </div>
                                         </div>
                                         <hr>
