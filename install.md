@@ -57,6 +57,8 @@ php artisan db:seed
 
 ## Paso 9
 ###### Storage publico
+agregar winrar images 
+storage->app->public->aqui....
 php artisan storage:link
 
 ## Paso 10
