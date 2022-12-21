@@ -53,14 +53,15 @@ class LoginController extends Controller
     }
     public function login(Request $request)
     {
+        $api_rest = 'http://api.taypi.senavex.gob.bo/api/pruebas/upea/v1/signin';
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'estado' => 'activo'])) {
-            $response = Http::post('http://api.taypi.senavex.gob.bo/api/pruebas/upea/v1/signin', [
+            $response = Http::post($api_rest, [
                 'ci' => $request->username,
                 'password' => $request->password,
             ]);
             if ($response->status() == 200) {
 
-                $dataEmp = Http::get('http://api.taypi.senavex.gob.bo/api/pruebas/upea/v1/signin/' . $response->object()->token);
+                $dataEmp = Http::get($api_rest . $response->object()->token);
                 foreach ($dataEmp->object() as $data) {
                     $GrupEmpUserId = GrupoEmpresaUser::where([['id_user', Auth::id()],['id_empresa',$data->id_empresa],['id_rol',$data->id_rol]])->first();
                     if(!$GrupEmpUserId) {
@@ -93,7 +94,7 @@ class LoginController extends Controller
                 return redirect()->route('home');
             }
         } else {
-            $response = Http::post('http://api.taypi.senavex.gob.bo/api/pruebas/upea/v1/signin', [
+            $response = Http::post($api_rest, [
                 'ci' => $request->username,
                 'password' => $request->password,
             ]);
